@@ -1,5 +1,6 @@
 ---
 title: "GroupProjectQuarto"
+author: "Claire Savage"
 format: html
 editor: visual
 self-contained: true
