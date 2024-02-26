@@ -1,6 +1,6 @@
 ---
 title: "GroupProjectQuarto"
-author: "Claire Savage"
+author: "Claire Savage, Dani Wells,"
 format: html
 editor: visual
 self-contained: true
