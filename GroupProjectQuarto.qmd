@@ -1,9 +1,15 @@
 ---
 title: "GroupProjectQuarto"
-author: "Claire Savage, Dani Wells,Abby drongpa"
+author: "Claire Savage, Dani Wells, Abby drongpa"
 format: html
 editor: visual
+code-fold: true
 self-contained: true
+execute: 
+  error: true
+  echo: true
+  message: false
+  warning: false
 ---
 
 ```{r setup}
