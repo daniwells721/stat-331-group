@@ -15,6 +15,15 @@ This will be where we explain what variables we picked and what they specificall
 Here we describe what we think the relationship is and put any outside sources we used
 
 ## Data Cleaning
+#Claire
+```{r}
+
+```
+
+#Abby
+```{r}
+
+```
 
 Pivot Longer
 
