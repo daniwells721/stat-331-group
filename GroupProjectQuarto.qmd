@@ -6,23 +6,18 @@ editor: visual
 self-contained: true
 ---
 
-## Quarto
+## Data and Variable Descriptions
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+This will be where we explain what variables we picked and what they specifically are in the data set
 
-## Running Code
+## Hypothesized Relationship
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Here we describe what we think the relationship is and put any outside sources we used
 
-```{r}
-1 + 1
-```
+## Data Cleaning
 
-You can add options to executable code like this
+Pivot Longer
 
-```{r}
-#| echo: false
-2 * 2
-```
+Clean Data
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Joining Data
