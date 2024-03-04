@@ -8,22 +8,13 @@ self-contained: true
 
 ## Data and Variable Descriptions
 
-This will be where we explain what variables we picked and what they specifically are in the data set
+For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the "Life expectancy, at birth" and "Consumption CO2 emissions, million tonnes" variables from Gapminder in our analysis
 
 ## Hypothesized Relationship
 
 Here we describe what we think the relationship is and put any outside sources we used
 
 ## Data Cleaning
-#Claire
-```{r}
-
-```
-
-#Abby
-```{r}
-
-```
 
 Pivot Longer
 
