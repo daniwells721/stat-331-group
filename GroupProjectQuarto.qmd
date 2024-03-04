@@ -6,6 +6,12 @@ editor: visual
 self-contained: true
 ---
 
+```{r setup}
+library(tidyverse)
+library(here)
+```
+
+
 ## Data and Variable Descriptions
 
 For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the "Life expectancy, at birth" and "Consumption CO2 emissions, million tonnes" variables from Gapminder in our analysis
@@ -15,6 +21,16 @@ For this project we will be looking at the Relationship between life expectancy 
 Here we describe what we think the relationship is and put any outside sources we used
 
 ## Data Cleaning
+
+#Claire
+```{r}
+
+```
+
+#Abby 
+```{r}
+
+```
 
 Pivot Longer
 
