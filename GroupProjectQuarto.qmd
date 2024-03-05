@@ -38,7 +38,7 @@ Here we describe what we think the relationship is and put any outside sources w
 #Abby
 
 ```{r}
-
+Lex_data <- read.csv(here::here("lex.csv"))
 ```
 
 Pivot Longer
