@@ -50,12 +50,11 @@ CO2_emissions_clean <- CO2_emissions %>%
 #Abby
 
 ```{r}
-lex_clean1 <- lex_data %>%
+lex_clean <- lex_data %>%
   select(country, X1920:X2020) %>%
-  rename_with(~ sub("^X", "", .x), starts_with("X")) %>%
-  pivot_longer(cols = !country, names_to = "year", values_to = "life_expectancy") %>%
-  drop_na(life_expectancy) %>%
-  pivot_wider(names_from = year, values_from = life_expectancy)
+  rename_with(~str_remove(., "^X"), starts_with("X")) %>%
+  filter(if_all(c(`1920`:`2020`), ~ !is.na(.)))
+
 
 ```
 
