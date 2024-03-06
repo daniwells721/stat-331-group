@@ -24,6 +24,8 @@ lex_data <- read_csv(here::here("lex.csv"))
 
 For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the "Life expectancy, at birth" and "Consumption CO2 emissions, million tonnes" variables from Gapminder in our analysis. Life expectancy at birth is measured in years and measures the number of years an infant born in the given country in the given year would live if mortality rates stay the same throughout its life. Total CO2 emissions is measured in million tonnes and is the total carbon dioxide emitted from each country per Capita.
 
+Our cleaned data sets are seperated by country and year with each row being a the specific life expectancy and CO2 emissions for that country in that year. We decided to look at at a century's worth of data from the years 1920 - 2020. Countries with NAs for values within these years were removed.
+
 ## Hypothesized Relationship
 
 We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.), “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects we know CO2 has on the human body.
@@ -42,9 +44,12 @@ CO2_emissions_clean <- CO2_emissions %>%
 ```{r}
 lex_clean <- lex_data %>%
   select(country, `1920`:`2020`) %>%
-  filter(if_all(c(`1920`:`2020`), ~ !is.na(.)))
+  filter(if_all(c(`1920`:`2020`), ~ !is.na(.))) %>%
+  pivot_longer(cols = `1920`:`2020`,
+               names_to = "year",
+               values_to = "life_exp")
 ```
 
-Pivot Longer
-
-Joining Data
+```{r}
+co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
+```
