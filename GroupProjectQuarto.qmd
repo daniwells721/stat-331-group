@@ -51,8 +51,7 @@ CO2_emissions_clean <- CO2_emissions %>%
 
 ```{r}
 lex_clean <- lex_data %>%
-  select(country, X1920:X2020) %>%
-  rename_with(~str_remove(., "^X"), starts_with("X")) %>%
+  select(country, `1920`:`2020`) %>%
   filter(if_all(c(`1920`:`2020`), ~ !is.na(.)))
 
 
