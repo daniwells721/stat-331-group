@@ -24,7 +24,7 @@ For this project we will be looking at the Relationship between life expectancy 
 
 ## Hypothesized Relationship
 
-Here we describe what we think the relationship is and put any outside sources we used
+We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.), “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects we know CO2 has on the human body.
 
 ## Data Cleaning
 
@@ -43,8 +43,11 @@ CO2_emissions_clean <- CO2_emissions %>%
                names_to = "year",
                values_to = "emissions")
 
+<<<<<<< HEAD
 ```
 
+=======
+>>>>>>> 5696aba1664b158c555e0fb69b543811f988476e
 #Abby
 
 ```{r}
@@ -52,7 +55,5 @@ Lex_data <- read.csv(here::here("lex.csv"))
 ```
 
 Pivot Longer
-
-Clean Data
 
 Joining Data
