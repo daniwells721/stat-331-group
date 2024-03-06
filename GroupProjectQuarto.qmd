@@ -30,7 +30,6 @@ We believe that increased levels of CO2 emission decrease life expectancy. Accor
 
 ## Data Cleaning
 
-
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
   mutate(`2022` = ifelse(str_detect(`2022`, "k"), 
@@ -40,14 +39,13 @@ CO2_emissions_clean <- CO2_emissions %>%
                           as.numeric(str_replace(`2021`, "k", "")) * 1000, 
                           as.numeric(`2021`))) %>% 
   mutate(across(c(`2003`:`2006`,`2011`:`2013`), as.numeric)) %>% 
-  select(country, `1922`:`2022`) %>% 
-  pivot_longer(cols = `1922`:`2022`,
+  select(country, `1920`:`2020`) %>% 
+  pivot_longer(cols = `1920`:`2020`,
                names_to = "year",
                values_to = "emissions")
 
 
 ```
-
 
 #Abby
 
