@@ -28,17 +28,22 @@ Here we describe what we think the relationship is and put any outside sources w
 
 ## Data Cleaning
 
-#Claire
 
 ```{r}
-CO2_emissions_clean <- CO2_emissions %>% 
-  mutate(across(`1800`: `2022`, as.numeric)) #%>% 
-  #pivot_longer(cols = `1800`:`2022`,
-   #            names_to = "year",
-    #           values_to = "emissions")
-# the negative symbols in the data set, can use str(CO2_emissions) to see which years have non-numeric values/something that is making them be considered a character (ie this one has some weird negatives)
-```
+CO2_emissions_clean <- CO2_emissions %>%
+  mutate(`2022` = ifelse(str_detect(`2022`, "k"), 
+                          as.numeric(str_replace(`2022`, "k", "")) * 1000, 
+                          as.numeric(`2022`)),
+         `2021` = ifelse(str_detect(`2021`, "k"), 
+                          as.numeric(str_replace(`2021`, "k", "")) * 1000, 
+                          as.numeric(`2021`))) %>% 
+  mutate(across(c(`2003`:`2006`,`2011`:`2013`), as.numeric)) %>% 
+  select(country, `1922`:`2022`) %>% 
+  pivot_longer(cols = `1922`:`2022`,
+               names_to = "year",
+               values_to = "emissions")
 
+```
 
 #Abby
 
