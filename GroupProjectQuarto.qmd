@@ -15,7 +15,9 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(here)
+library(dplyr)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
+lex_data <- read.csv(here::here("lex.csv"))
 ```
 
 ## Data and Variable Descriptions
@@ -43,15 +45,15 @@ CO2_emissions_clean <- CO2_emissions %>%
                names_to = "year",
                values_to = "emissions")
 
-<<<<<<< HEAD
+
 ```
 
-=======
->>>>>>> 5696aba1664b158c555e0fb69b543811f988476e
+
 #Abby
 
 ```{r}
-Lex_data <- read.csv(here::here("lex.csv"))
+lex_clean <- lex_data %>%
+  select(country, `1920`:`2020`)
 ```
 
 Pivot Longer
