@@ -24,7 +24,7 @@ lex_data <- read_csv(here::here("lex.csv"))
 
 For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the "Life expectancy, at birth" and "Consumption CO2 emissions, million tonnes" variables from Gapminder in our analysis. Life expectancy at birth is measured in years and measures the number of years an infant born in the given country in the given year would live if mortality rates stay the same throughout its life. Total CO2 emissions is measured in million tonnes and is the total carbon dioxide emitted from each country per Capita.
 
-Our cleaned data sets are seperated by country and year with each row being a the specific life expectancy and CO2 emissions for that country in that year. We decided to look at at a century's worth of data from the years 1920 - 2020. Countries with NAs for values within these years were removed.
+Our cleaned data sets are separated by country and year with each row being a the specific life expectancy and CO2 emissions for that country in that year. We decided to look at at a century's worth of data from the years 1920 - 2020. Countries with NAs for values within these years were removed.
 
 ## Hypothesized Relationship
 
