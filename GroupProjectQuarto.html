@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Claire Savage, Dani Wells, Abby drongpa">
+<meta name="author" content="Claire Savage, Dani Wells, Abby Drongpa">
 
 <title>GroupProjectQuarto</title>
 <style>
@@ -3034,7 +3034,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Claire Savage, Dani Wells, Abby drongpa </p>
+             <p>Claire Savage, Dani Wells, Abby Drongpa </p>
           </div>
   </div>
     
@@ -3070,7 +3070,7 @@ vertical-align: -.125em;
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CO2_emissions_clean <span class="ot">&lt;-</span> CO2_emissions <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), as.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(.x, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;-0.34&quot;</span>, <span class="st">&quot;-0.275&quot;</span>, <span class="st">&quot;-1.69&quot;</span>, <span class="st">&quot;-0.265&quot;</span>, <span class="st">&quot;-0.013&quot;</span>, <span class="st">&quot;-2.17&quot;</span>, <span class="st">&quot;-1.24&quot;</span>)))) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
