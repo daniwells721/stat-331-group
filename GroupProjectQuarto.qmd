@@ -34,7 +34,12 @@ We believe that increased levels of CO2 emission decrease life expectancy. Accor
 
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
-  mutate(across(c(`2003`:`2006`,`2011`:`2013`), ~ as.numeric(.x, na = c("-0.34", "-0.275", "-1.69", "-0.265", "-0.013", "-2.17", "-1.24")))) %>% 
+  mutate(across(c(`2003`:`2006`,`2011`:`2013`), 
+                ~str_replace(.x, 
+                             pattern = "−", 
+                             replace = "-")), 
+         across(c(`2003`:`2006`,`2011`:`2013`), ~
+                  as.numeric(.x))) %>% 
   select(country, `1920`:`2020`) %>% 
   pivot_longer(cols = `1920`:`2020`,
                names_to = "year",
