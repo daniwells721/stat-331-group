@@ -3103,6 +3103,34 @@ vertical-align: -.125em;
 <li><p>Interpret the Linear Regression coefficients (in context)</p></li>
 <li><p>Describe the fit of the regression model (both table and written format)</p></li>
 </ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_co2life <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> emissions, <span class="at">data =</span> co2life_clean)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_co2life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_exp ~ emissions, data = co2life_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-52.504 -11.773   1.809  12.698  27.504 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 5.657e+01  1.085e-01  521.23   &lt;2e-16 ***
+emissions   6.752e-03  2.507e-04   26.93   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 14.6 on 18777 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.0372,    Adjusted R-squared:  0.03715 
+F-statistic: 725.5 on 1 and 18777 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 </section>
 
 </main>

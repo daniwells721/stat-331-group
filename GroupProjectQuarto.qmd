@@ -66,5 +66,6 @@ co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
 -   Describe the fit of the regression model (both table and written format)
 
 ```{r}
-
+mod_co2life <- lm(life_exp ~ emissions, data = co2life_clean)
+summary(mod_co2life)
 ```
