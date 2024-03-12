@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Claire Savage, Dani Wells, Abby Drongpa">
+<meta name="author" content="Claire Savage, Dani Wells, Abby drongpa">
 
 <title>GroupProjectQuarto</title>
 <style>
@@ -3034,7 +3034,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Claire Savage, Dani Wells, Abby Drongpa </p>
+             <p>Claire Savage, Dani Wells, Abby drongpa </p>
           </div>
   </div>
     
@@ -3050,32 +3050,30 @@ vertical-align: -.125em;
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>CO2_emissions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;co2_cons.csv&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>lex_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;lex.csv&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>CO2_emissions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;co2_cons.csv&quot;</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lex_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;lex.csv&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life.</p>
-<p>We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects CO2 is known to have on the human body.</p>
+<section id="data-and-variable-descriptions" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-variable-descriptions">Data and Variable Descriptions</h2>
+<p>For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis. Life expectancy at birth is measured in years and measures the number of years an infant born in the given country in the given year would live if mortality rates stay the same throughout its life. Total CO2 emissions is measured in million tonnes and is the total carbon dioxide emitted from each country per Capita.</p>
+<p>Our cleaned data sets are separated by country and year with each row being a the specific life expectancy and CO2 emissions for that country in that year. We decided to look at at a century’s worth of data from the years 1920 - 2020. Countries with NAs for values within these years were removed.</p>
 </section>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="hypothesized-relationship" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesized-relationship">Hypothesized Relationship</h2>
+<p>We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects we know CO2 has on the human body.</p>
+</section>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CO2_emissions_clean <span class="ot">&lt;-</span> CO2_emissions <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span><span class="fu">str_replace</span>(.x, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="st">&quot;−&quot;</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">replace =</span> <span class="st">&quot;-&quot;</span>)), </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), <span class="sc">~</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(.x))) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;emissions&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), as.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;emissions&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -3095,7 +3093,6 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>co2life_clean <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(CO2_emissions_clean, lex_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2020 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2020), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.</p>
 </section>
 <section id="data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
@@ -3115,8 +3112,77 @@ vertical-align: -.125em;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The relationship between the two quantitative variables you are investigating.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The relationship between the two quantitative variables you are investigating.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>co2_life_twodecade <span class="ot">&lt;-</span> co2life_clean<span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.factor</span>(year)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">twodecade =</span> <span class="fu">fct_collapse</span>(year, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y1920_1940 =</span> <span class="fu">c</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;1920&quot;</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;1921&quot;</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                            ...</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;1940&quot;</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">North_Coast =</span> <span class="fu">c</span>(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Del Norte County&quot;</span>, </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Humboldt County&quot;</span>, </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Lake County&quot;</span>, </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Mendocino County&quot;</span>, </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Napa County&quot;</span>, </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Sonoma County&quot;</span>, </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Trinity County&quot;</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                          <span class="at">SF_Bay_Area         =</span> <span class="fu">c</span>(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Alameda County&quot;</span>, </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Contra Costa County&quot;</span>, </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Marin County&quot;</span>, </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Francisco County&quot;</span>, </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Mateo County&quot;</span>, </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Santa Clara County&quot;</span>, </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Solano County&quot;</span>),</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Northern_SJ_Valley  =</span> <span class="fu">c</span>(</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Alpine County&quot;</span>, </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Amador County&quot;</span>, </span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Calaveras County&quot;</span>, </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Madera County&quot;</span>, </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Mariposa County&quot;</span>, </span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Merced County&quot;</span>, </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Mono County&quot;</span>, </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Joaquin County&quot;</span>, </span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Stanislaus County&quot;</span>, </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Tuolumne County&quot;</span>),</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Central_Coast       =</span> <span class="fu">c</span>(</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Monterey County&quot;</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Benito County&quot;</span>,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Luis Obispo County&quot;</span>,</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Santa Barbara County&quot;</span>,</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Santa Cruz County&quot;</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Ventura County&quot;</span>),</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Southern_SJ_Valley =</span> <span class="fu">c</span>(</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Fresno County&quot;</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Inyo County&quot;</span>,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Kern County&quot;</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Kings County&quot;</span>,</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Tulare County&quot;</span>),</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Inland_Empire =</span> <span class="fu">c</span>(</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Riverside County&quot;</span>,</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Bernardino County&quot;</span>),</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>                          <span class="at">LA_County =</span> <span class="fu">c</span>(<span class="st">&quot;Los Angeles County&quot;</span>),</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Orange_County =</span> <span class="fu">c</span>(<span class="st">&quot;Orange County&quot;</span>),</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>                          <span class="at">SD_Imperial =</span> <span class="fu">c</span>(</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Imperial County&quot;</span>,</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;San Diego County&quot;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>                            )</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>                          )</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-error">
+<pre><code>Error: &lt;text&gt;:13:29: unexpected string constant
+12:                             ...
+13:                             &quot;1940&quot;
+                                ^</code></pre>
+</div>
 </div>
 <p><strong>Hint: In investigating this relationship, you may want to first average over the years for each country (i.e., one observational row per country since our independence condition would be violated).</strong></p>
 </section>
@@ -3126,8 +3192,8 @@ vertical-align: -.125em;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_co2life <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> emissions, <span class="at">data =</span> co2life_clean)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_co2life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod_co2life <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> emissions, <span class="at">data =</span> co2life_clean)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_co2life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -3136,18 +3202,19 @@ lm(formula = life_exp ~ emissions, data = co2life_clean)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.512 -11.781   1.808  12.694  27.496 
+-52.504 -11.773   1.809  12.698  27.504 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.658e+01  1.085e-01  521.29   &lt;2e-16 ***
-emissions   6.749e-03  2.507e-04   26.91   &lt;2e-16 ***
+(Intercept) 5.657e+01  1.085e-01  521.23   &lt;2e-16 ***
+emissions   6.752e-03  2.507e-04   26.93   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 14.6 on 18784 degrees of freedom
-Multiple R-squared:  0.03713,   Adjusted R-squared:  0.03708 
-F-statistic: 724.4 on 1 and 18784 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 14.6 on 18777 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.0372,    Adjusted R-squared:  0.03715 
+F-statistic: 725.5 on 1 and 18777 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
