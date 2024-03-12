@@ -1,6 +1,6 @@
 ---
 title: "GroupProjectQuarto"
-author: "Claire Savage, Dani Wells, Abby drongpa"
+author: "Claire Savage, Dani Wells, Abby Drongpa"
 format: html
 editor: visual
 code-fold: true
@@ -15,25 +15,27 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(here)
+library(broom)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
 
 ## Data and Variable Descriptions
 
-For this project we will be looking at the Relationship between life expectancy at birth and total CO2 emissions. We will be using the "Life expectancy, at birth" and "Consumption CO2 emissions, million tonnes" variables from Gapminder in our analysis. Life expectancy at birth is measured in years and measures the number of years an infant born in the given country in the given year would live if mortality rates stay the same throughout its life. Total CO2 emissions is measured in million tonnes and is the total carbon dioxide emitted from each country per Capita.
+  As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life.  
 
-Our cleaned data sets are separated by country and year with each row being a the specific life expectancy and CO2 emissions for that country in that year. We decided to look at at a century's worth of data from the years 1920 - 2020. Countries with NAs for values within these years were removed.
+  We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects CO2 is known to have on the human body.
 
-## Hypothesized Relationship
-
-We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.), “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects we know CO2 has on the human body.
-
-## Data Cleaning
+## Methods
 
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
-  mutate(across(c(`2003`:`2006`,`2011`:`2013`), as.numeric)) %>% 
+  mutate(across(c(`2003`:`2006`,`2011`:`2013`), 
+                ~str_replace(.x, 
+                             pattern = "−", 
+                             replace = "-")), 
+         across(c(`2003`:`2006`,`2011`:`2013`), ~
+                  as.numeric(.x))) %>% 
   select(country, `1920`:`2020`) %>% 
   pivot_longer(cols = `1920`:`2020`,
                names_to = "year",
@@ -52,6 +54,8 @@ lex_clean <- lex_data %>%
 ```{r}
 co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
 ```
+
+We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2020 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2020), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
 
 ## Data Visualization
 
