@@ -24,7 +24,7 @@ lex_data <- read_csv(here::here("lex.csv"))
 
 As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
 
-We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” 
+We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
 
 ## Methods
 
@@ -94,6 +94,14 @@ co2_life_twodecade <- co2life_clean|>
 
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
+
+co2_life_twodecade|>
+  ggplot(
+    aes( x = emissions, y = life_exp)
+  ) +
+  geom_point(size = 0.8, alpha = 0.5) +
+  facet_wrap(~factor(twodecade))+
+  theme_bw()
 ```
 
 ```{r}
