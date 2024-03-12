@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Claire Savage, Dani Wells, Abby Drongpa">
+<meta name="author" content="Claire Savage, Dani Wells, Abby drongpa">
 
 <title>GroupProjectQuarto</title>
 <style>
@@ -3034,7 +3034,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Claire Savage, Dani Wells, Abby Drongpa </p>
+             <p>Claire Savage, Dani Wells, Abby drongpa </p>
           </div>
   </div>
     
@@ -3069,16 +3069,11 @@ vertical-align: -.125em;
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>CO2_emissions_clean <span class="ot">&lt;-</span> CO2_emissions <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span><span class="fu">str_replace</span>(.x, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="st">&quot;−&quot;</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">replace =</span> <span class="st">&quot;-&quot;</span>)), </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), <span class="sc">~</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(.x))) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;emissions&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), as.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;emissions&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -3098,6 +3093,16 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>co2life_clean <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(CO2_emissions_clean, lex_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="linear-regression" class="level1">
+<h1>Linear Regression</h1>
+<ul>
+<li><p>Present and discuss the visualizations of the relationship between the variables</p></li>
+<li><p>Describe the statistical method used – linear regression</p></li>
+<li><p>Present the estimated regression model (in notation)</p></li>
+<li><p>Interpret the Linear Regression coefficients (in context)</p></li>
+<li><p>Describe the fit of the regression model (both table and written format)</p></li>
+</ul>
 </section>
 
 </main>

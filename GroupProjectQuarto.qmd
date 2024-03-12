@@ -1,6 +1,6 @@
 ---
 title: "GroupProjectQuarto"
-author: "Claire Savage, Dani Wells, Abby Drongpa"
+author: "Claire Savage, Dani Wells, Abby drongpa"
 format: html
 editor: visual
 code-fold: true
@@ -33,12 +33,7 @@ We believe that increased levels of CO2 emission decrease life expectancy. Accor
 
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
-  mutate(across(c(`2003`:`2006`,`2011`:`2013`), 
-                ~str_replace(.x, 
-                             pattern = "−", 
-                             replace = "-")), 
-         across(c(`2003`:`2006`,`2011`:`2013`), ~
-                  as.numeric(.x))) %>% 
+  mutate(across(c(`2003`:`2006`,`2011`:`2013`), as.numeric)) %>% 
   select(country, `1920`:`2020`) %>% 
   pivot_longer(cols = `1920`:`2020`,
                names_to = "year",
@@ -56,4 +51,20 @@ lex_clean <- lex_data %>%
 
 ```{r}
 co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
+```
+
+# Linear Regression
+
+-   Present and discuss the visualizations of the relationship between the variables
+
+-   Describe the statistical method used – linear regression
+
+-   Present the estimated regression model (in notation)
+
+-   Interpret the Linear Regression coefficients (in context)
+
+-   Describe the fit of the regression model (both table and written format)
+
+```{r}
+
 ```
