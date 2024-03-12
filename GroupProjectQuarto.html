@@ -3051,9 +3051,8 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>CO2_emissions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;co2_cons.csv&quot;</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>lex_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;lex.csv&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>CO2_emissions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;co2_cons.csv&quot;</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>lex_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;lex.csv&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="data-and-variable-descriptions" class="level2">
@@ -3176,19 +3175,18 @@ lm(formula = life_exp ~ emissions, data = co2life_joined)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.348 -11.796   1.688  12.720  27.662 
+-52.357 -11.784   1.692  12.732  27.653 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.641e+01  1.089e-01  518.00   &lt;2e-16 ***
-emissions   6.900e-03  2.554e-04   27.02   &lt;2e-16 ***
+(Intercept) 5.642e+01  1.089e-01  518.06   &lt;2e-16 ***
+emissions   6.896e-03  2.555e-04   26.99   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 14.58 on 18591 degrees of freedom
-  (7 observations deleted due to missingness)
-Multiple R-squared:  0.03778,   Adjusted R-squared:  0.03772 
-F-statistic: 729.9 on 1 and 18591 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 14.58 on 18598 degrees of freedom
+Multiple R-squared:  0.0377,    Adjusted R-squared:  0.03765 
+F-statistic: 728.7 on 1 and 18598 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
