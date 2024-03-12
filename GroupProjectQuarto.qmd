@@ -15,7 +15,6 @@ execute:
 ```{r setup}
 library(tidyverse)
 library(here)
-library(dplyr)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
