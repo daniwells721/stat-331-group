@@ -3094,8 +3094,8 @@ vertical-align: -.125em;
 </details>
 </div>
 </section>
-<section id="linear-regression" class="level1">
-<h1>Linear Regression</h1>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
 <ul>
 <li><p>Present and discuss the visualizations of the relationship between the variables</p></li>
 <li><p>Describe the statistical method used – linear regression</p></li>
@@ -3106,8 +3106,25 @@ vertical-align: -.125em;
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_co2life <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> emissions, <span class="at">data =</span> co2life_clean)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_co2life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The relationship between the two quantitative variables changing over time. Get creative!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The relationship between the two quantitative variables you are investigating.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Hint: In investigating this relationship, you may want to first average over the years for each country (i.e., one observational row per country since our independence condition would be violated).</strong></p>
+</section>
+<section id="linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression">Linear Regression</h2>
+<p>Your final report should present the estimated regression model <em>and</em> provide an interpretation for each of the coefficients output.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_co2life <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> emissions, <span class="at">data =</span> co2life_clean)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_co2life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -3131,6 +3148,17 @@ Multiple R-squared:  0.0372,    Adjusted R-squared:  0.03715
 F-statistic: 725.5 on 1 and 18777 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+</section>
+<section id="model-fit" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit">Model Fit</h2>
+<p>Make a nicely formatted table that presents the following:</p>
+<ul>
+<li><p>The variance in the response values</p></li>
+<li><p>The variance in the fitted values from your regression model</p></li>
+<li><p>The variance in the residuals from your regression model</p></li>
+</ul>
+<p>Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?</p>
+<p><strong>Hint: The goal of regression is to account for as much variability in the <em>response</em> values as we can. Here, the variance in the <em>fitted values</em> represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the <em>residuals</em> represents the amount of variability in the responses that has <em>not</em> been accounted for.</strong></p>
 </section>
 
 </main>

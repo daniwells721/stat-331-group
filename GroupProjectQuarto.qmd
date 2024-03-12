@@ -53,7 +53,7 @@ lex_clean <- lex_data %>%
 co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
 ```
 
-# Linear Regression
+## Data Visualization
 
 -   Present and discuss the visualizations of the relationship between the variables
 
@@ -66,6 +66,38 @@ co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
 -   Describe the fit of the regression model (both table and written format)
 
 ```{r}
+#The relationship between the two quantitative variables changing over time. Get creative!
+```
+
+```{r}
+#The relationship between the two quantitative variables you are investigating.
+```
+
+**Hint: In investigating this relationship, you may want to first average over the years for each country (i.e., one observational row per country since our independence condition would be violated).**
+
+## Linear Regression
+
+Your final report should present the estimated regression model *and* provide an interpretation for each of the coefficients output.
+
+```{r}
 mod_co2life <- lm(life_exp ~ emissions, data = co2life_clean)
 summary(mod_co2life)
 ```
+
+## Model Fit
+
+Make a nicely formatted table that presents the following:
+
+-   The variance in the response values
+
+-   The variance in the fitted values from your regression model
+
+-   The variance in the residuals from your regression model
+
+Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
+
+```{r}
+
+```
+
+**Hint: The goal of regression is to account for as much variability in the *response* values as we can. Here, the variance in the *fitted values* represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the *residuals* represents the amount of variability in the responses that has *not* been accounted for.**
