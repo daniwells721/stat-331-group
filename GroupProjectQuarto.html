@@ -3057,7 +3057,7 @@ vertical-align: -.125em;
 </div>
 <section id="data-and-variable-descriptions" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-variable-descriptions">Data and Variable Descriptions</h2>
-<p>As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2020 because these years were the most recent for which most countries had data available. We chose to omit the data post 2020 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.</p>
+<p>As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.</p>
 <p>We believe that increased levels of CO2 emission decrease life expectancy. According to a study conducted by the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.">National Library of Medicine</a>, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.” Which is in line with the harmful effects CO2 is known to have on the human body.</p>
 </section>
 <section id="methods" class="level2">
@@ -3072,8 +3072,8 @@ vertical-align: -.125em;
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">replace =</span> <span class="st">&quot;-&quot;</span>)), </span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2003</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2006</span><span class="st">`</span>,<span class="st">`</span><span class="at">2011</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>), <span class="sc">~</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(.x))) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>,</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;emissions&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -3082,9 +3082,9 @@ vertical-align: -.125em;
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lex_clean <span class="ot">&lt;-</span> lex_data <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>), <span class="sc">~</span> <span class="sc">!</span><span class="fu">is.na</span>(.))) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>), <span class="sc">~</span> <span class="sc">!</span><span class="fu">is.na</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1920</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;life_exp&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -3095,7 +3095,7 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>co2life_clean <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(CO2_emissions_clean, lex_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2020 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2020), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.</p>
+<p>We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.</p>
 </section>
 <section id="data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
@@ -3205,18 +3205,19 @@ lm(formula = life_exp ~ emissions, data = co2life_clean)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.512 -11.781   1.808  12.694  27.496 
+-52.348 -11.796   1.688  12.720  27.662 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.658e+01  1.085e-01  521.29   &lt;2e-16 ***
-emissions   6.749e-03  2.507e-04   26.91   &lt;2e-16 ***
+(Intercept) 5.641e+01  1.089e-01  518.00   &lt;2e-16 ***
+emissions   6.900e-03  2.554e-04   27.02   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 14.6 on 18784 degrees of freedom
-Multiple R-squared:  0.03713,   Adjusted R-squared:  0.03708 
-F-statistic: 724.4 on 1 and 18784 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 14.58 on 18591 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.03778,   Adjusted R-squared:  0.03772 
+F-statistic: 729.9 on 1 and 18591 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
