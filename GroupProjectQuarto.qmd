@@ -52,7 +52,7 @@ lex_clean <- lex_data %>%
 ```
 
 ```{r}
-co2life_clean <- inner_join(CO2_emissions_clean, lex_clean)
+co2life_joined <- inner_join(CO2_emissions_clean, lex_clean)
 ```
 
 We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
@@ -70,11 +70,12 @@ We started by cleaning the data sets. For the CO2 emissions data set, the negati
 -   Describe the fit of the regression model (both table and written format)
 
 ```{r}
-#The relationship between the two quantitative variables changing over time. Get creative!
-```
-
-```{r}
-#The relationship between the two quantitative variables you are investigating.
+#Seperating the data into 20 year chunks
+years_1920_1939 <- as.character(seq(1920, 1939))
+years_1940_1959 <- as.character(seq(1940, 1959))
+years_1960_1979 <- as.character(seq(1960, 1979))
+years_1980_1999 <- as.character(seq(1980, 1999))
+years_2000_2019 <- as.character(seq(2000, 2019))
 
 co2_life_twodecade <- co2life_clean|>
   mutate(
@@ -82,62 +83,23 @@ co2_life_twodecade <- co2life_clean|>
   )|>
   mutate(
     twodecade = fct_collapse(year, 
-                          y1920_1940 = c(
-                            "1920",
-                            "1921",
-                            ...
-                            "1940"),
-                          North_Coast = c(
-                            "Del Norte County", 
-                            "Humboldt County", 
-                            "Lake County", 
-                            "Mendocino County", 
-                            "Napa County", 
-                            "Sonoma County", 
-                            "Trinity County"),
-                          SF_Bay_Area         = c(
-                            "Alameda County", 
-                            "Contra Costa County", 
-                            "Marin County", 
-                            "San Francisco County", 
-                            "San Mateo County", 
-                            "Santa Clara County", 
-                            "Solano County"),
-                          Northern_SJ_Valley  = c(
-                            "Alpine County", 
-                            "Amador County", 
-                            "Calaveras County", 
-                            "Madera County", 
-                            "Mariposa County", 
-                            "Merced County", 
-                            "Mono County", 
-                            "San Joaquin County", 
-                            "Stanislaus County", 
-                            "Tuolumne County"),
-                          Central_Coast       = c(
-                            "Monterey County",
-                            "San Benito County",
-                            "San Luis Obispo County",
-                            "Santa Barbara County",
-                            "Santa Cruz County",
-                            "Ventura County"),
-                          Southern_SJ_Valley = c(
-                            "Fresno County",
-                            "Inyo County",
-                            "Kern County",
-                            "Kings County",
-                            "Tulare County"),
-                          Inland_Empire = c(
-                            "Riverside County",
-                            "San Bernardino County"),
-                          LA_County = c("Los Angeles County"),
-                          Orange_County = c("Orange County"),
-                          SD_Imperial = c(
-                            "Imperial County",
-                            "San Diego County"
-                            )
-                          )
+                             y1920_1940 = years_1920_1940,
+                             y1940_1959 = years_1940_1959,
+                             y1960_1979 = years_1960_1979,
+                             y1980_1999 = years_1980_1999,
+                             y2000_2019 = years_2000_2019
     )
+  )
+```
+
+```{r}
+#The relationship between the two quantitative variables changing over time. Get creative!
+```
+
+```{r}
+#The relationship between the two quantitative variables you are investigating.
+
+
 ```
 
 **Hint: In investigating this relationship, you may want to first average over the years for each country (i.e., one observational row per country since our independence condition would be violated).**
@@ -147,7 +109,7 @@ co2_life_twodecade <- co2life_clean|>
 Your final report should present the estimated regression model *and* provide an interpretation for each of the coefficients output.
 
 ```{r}
-mod_co2life <- lm(life_exp ~ emissions, data = co2life_clean)
+mod_co2life <- lm(life_exp ~ emissions, data = co2life_joined)
 summary(mod_co2life)
 ```
 
