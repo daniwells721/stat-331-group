@@ -3106,6 +3106,7 @@ vertical-align: -.125em;
 <li><p>Interpret the Linear Regression coefficients (in context)</p></li>
 <li><p>Describe the fit of the regression model (both table and written format)</p></li>
 </ul>
+<p>To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -3141,6 +3142,7 @@ vertical-align: -.125em;
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Next to get a clearer picture of the relationship between our quantitative variables we averaged out both life expectancy and CO2 emissions by country and 20 year period and re-graphed our plot with a line showing the linear regression relationship between variables.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -3233,6 +3235,11 @@ Multiple R-squared:  0.0404,    Adjusted R-squared:  0.03937
 F-statistic: 39.07 on 1 and 928 DF,  p-value: 6.223e-10</code></pre>
 </div>
 </div>
+<p>From this regression we get the equation: avg_life_exp = 56.405726 + 0.007071avg_emissions</p>
+<p>This is surprising since it is contradictory to our hypothesized result. The intercept coefficient means if there were no CO2 emissions then the average life expectancy for people at birth would be around 56 years, while the coefficient of 0.007 on our avg_emissions variable means with each million tonne increase in average CO2 emissions average life expectancy <em>increases</em> by 0.007 years.</p>
+</section>
+<section id="model-fit" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit">Model Fit</h2>
 <p>Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?</p>
 <div class="cell">
 <details>

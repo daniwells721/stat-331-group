@@ -69,6 +69,8 @@ We started by cleaning the data sets. For the CO2 emissions data set, the negati
 
 -   Describe the fit of the regression model (both table and written format)
 
+To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
+
 ```{r}
 #Seperating the data into 20 year chunks
 years_1920_1939 <- as.character(seq(1920, 1939))
@@ -102,6 +104,8 @@ avg_co2_life <- co2_life_twodecade |>
   )
 
 ```
+
+Next to get a clearer picture of the relationship between our quantitative variables we averaged out both life expectancy and CO2 emissions by country and 20 year period and re-graphed our plot with a line showing the linear regression relationship between variables.
 
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
@@ -165,6 +169,12 @@ mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 summary(mod_co2life)
 ```
 
+From this regression we get the equation: avg_life_exp = 56.405726 + 0.007071avg_emissions
+
+This is surprising since it is contradictory to our hypothesized result. The intercept coefficient means if there were no CO2 emissions then the average life expectancy for people at birth would be around 56 years, while the coefficient of 0.007 on our avg_emissions variable means with each million tonne increase in average CO2 emissions average life expectancy *increases* by 0.007 years.
+
+## Model Fit
+
 Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
 
 ```{r}
@@ -174,5 +184,7 @@ augment(mod_co2life) %>%
             life_resid = var(.resid)
             )
 ```
+
 There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear. 
 **Hint: The goal of regression is to account for as much variability in the *response* values as we can. Here, the variance in the *fitted values* represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the *residuals* represents the amount of variability in the responses that has *not* been accounted for.**
+
