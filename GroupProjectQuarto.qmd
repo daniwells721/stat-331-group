@@ -114,7 +114,7 @@ co2_life_twodecade|>
   facet_wrap(~factor(twodecade))+
   theme_bw()+
   labs(
-    title = "Scatterplot of CO2 emissions Vs. Life Expectancy", 
+    title = "Scatterplot of CO2 Emissions Vs. Life Expectancy", 
     subtitle = "Life Expectancy", 
     y = "", 
     x = "CO2 Emissions"
