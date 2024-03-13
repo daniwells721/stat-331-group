@@ -165,5 +165,5 @@ augment(mod_co2life) %>%
             life_resid = var(.resid)
             )
 ```
-
+There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. Additionally, the high variance of the fitted values suggest that the predictions are also much more spread out. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely  not linear. 
 **Hint: The goal of regression is to account for as much variability in the *response* values as we can. Here, the variance in the *fitted values* represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the *residuals* represents the amount of variability in the responses that has *not* been accounted for.**
