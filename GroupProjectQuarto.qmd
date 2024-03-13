@@ -108,7 +108,7 @@ avg_co2_life <- co2_life_twodecade |>
 
 co2_life_twodecade|>
   ggplot(
-    aes( x = emissions, y = life_exp)
+    aes( x = emissions, y = life_exp, color = twodecade)
   ) +
   geom_point(size = 0.8, alpha = 0.5) +
   facet_wrap(~factor(twodecade))+
@@ -118,22 +118,31 @@ co2_life_twodecade|>
     subtitle = "Life Expectancy", 
     y = "", 
     x = "CO2 Emissions"
-  )
+  )+
+  theme(
+    legend.position = "bottom", 
+    plot.title = element_text(hjust = 0.5), 
+    plot.subtitle = element_text(hjust = 0.5) 
+  ) +
+  scale_color_viridis_d(
+    name = "Period", 
+    guide = guide_legend(title = "Two-Decade Period")
+    )
 ```
 
 ```{r}
 #The relationship between the two quantitative variables you are investigating.
-co2_life_twodecade %>%
-  ggplot(aes(x = emissions, y = life_exp, color = twodecade)) + # Color by twodecade
-  geom_point(size = 0.8, alpha = 0.5) + # Points with slightly reduced opacity for clarity
-  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + # Add linear model lines per twodecade
-  facet_wrap(~factor(twodecade)) + # Separate plots for each twodecade
-  theme_minimal() + # Using a minimal theme for cleaner visuals
+avg_co2_life %>%
+  ggplot(aes(x = avg_emissions, y = avg_life_exp, color = twodecade)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
+  facet_wrap(~factor(twodecade)) + 
+  theme_bw() + 
   labs(
     title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
-    subtitle = "Analyzed across different two-decade periods",
+    subtitle = "Life Expectancy (years)",
     x = "CO2 Emissions (metric tons per capita)",
-    y = "Life Expectancy (years)",
+    y = "",
     caption = "Data grouped by two-decade periods to illustrate changes over time."
   ) +
   theme(
@@ -141,7 +150,7 @@ co2_life_twodecade %>%
     plot.title = element_text(hjust = 0.5), # Center-align the title
     plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
   ) +
-  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period")) # Use Viridis color scale for clarity
+  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
 
 ```
 
