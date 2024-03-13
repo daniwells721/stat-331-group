@@ -148,7 +148,11 @@ Make a nicely formatted table that presents the following:
 Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
 
 ```{r}
-
+augment(mod_co2life) %>% 
+  summarize(life_re = var(life_exp), 
+            life_fitt = var(.fitted),
+            life_resid = var(.resid)
+            )
 ```
 
 **Hint: The goal of regression is to account for as much variability in the *response* values as we can. Here, the variance in the *fitted values* represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the *residuals* represents the amount of variability in the responses that has *not* been accounted for.**
