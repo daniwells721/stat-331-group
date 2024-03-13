@@ -93,7 +93,7 @@ co2_life_twodecade <- co2life_joined|>
   ) 
 
 
-#Averaging the data by country and two decade years
+#Averaging the data by country 
 avg_co2_life <- co2_life_twodecade |>
   group_by(country, twodecade) |>
   summarise(
@@ -134,25 +134,16 @@ co2_life_twodecade|>
 Your final report should present the estimated regression model *and* provide an interpretation for each of the coefficients output.
 
 ```{r}
-mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
+mod_co2life <- lm(life_exp ~ emissions, data = co2life_joined)
 summary(mod_co2life)
 ```
 
-## Model Fit
-
-Make a nicely formatted table that presents the following:
-
--   The variance in the response values
-
--   The variance in the fitted values from your regression model
-
--   The variance in the residuals from your regression model
 
 Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
 
 ```{r}
 augment(mod_co2life) %>% 
-  summarize(life_re = var(avg_life_exp), 
+  summarize(life_re = var(life_exp), 
             life_fitt = var(.fitted),
             life_resid = var(.resid)
             )
