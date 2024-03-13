@@ -83,13 +83,24 @@ co2_life_twodecade <- co2life_joined|>
   )|>
   mutate(
     twodecade = fct_collapse(year, 
-                             y1920_1940 = years_1920_1939,
-                             y1940_1959 = years_1940_1959,
-                             y1960_1979 = years_1960_1979,
-                             y1980_1999 = years_1980_1999,
-                             y2000_2019 = years_2000_2019
+                             `1920`-`1940` = years_1920_1939,
+                             `1940`-`1959` = years_1940_1959,
+                             `1960`-`1979` = years_1960_1979,
+                             `1980`-`1999` = years_1980_1999,
+                             `2000`-`2019` = years_2000_2019
     )
+
   ) 
+
+
+#Averaging the data by country 
+avg_co2_life <- co2_life_twodecade |>
+  group_by(country, twodecade) |>
+  summarise(
+    avg_emissions = mean(emissions, na.rm = TRUE),
+    avg_life_exp = mean(life_exp, na.rm = TRUE)
+  )
+
 ```
 
 ```{r}
