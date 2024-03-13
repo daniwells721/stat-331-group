@@ -3175,19 +3175,18 @@ lm(formula = life_exp ~ emissions, data = co2life_joined)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--52.348 -11.796   1.688  12.720  27.662 
+-52.357 -11.784   1.692  12.732  27.653 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.641e+01  1.089e-01  518.00   &lt;2e-16 ***
-emissions   6.900e-03  2.554e-04   27.02   &lt;2e-16 ***
+(Intercept) 5.642e+01  1.089e-01  518.06   &lt;2e-16 ***
+emissions   6.896e-03  2.555e-04   26.99   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 14.58 on 18591 degrees of freedom
-  (7 observations deleted due to missingness)
-Multiple R-squared:  0.03778,   Adjusted R-squared:  0.03772 
-F-statistic: 729.9 on 1 and 18591 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 14.58 on 18598 degrees of freedom
+Multiple R-squared:  0.0377,    Adjusted R-squared:  0.03765 
+F-statistic: 728.7 on 1 and 18598 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -3200,6 +3199,22 @@ F-statistic: 729.9 on 1 and 18591 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>The variance in the residuals from your regression model</p></li>
 </ul>
 <p>Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(mod_co2life) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">life_re =</span> <span class="fu">var</span>(life_exp), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">life_fitt =</span> <span class="fu">var</span>(.fitted),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">life_resid =</span> <span class="fu">var</span>(.resid)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  life_re life_fitt life_resid
+    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1    221.      8.33       213.</code></pre>
+</div>
+</div>
 <p><strong>Hint: The goal of regression is to account for as much variability in the <em>response</em> values as we can. Here, the variance in the <em>fitted values</em> represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the <em>residuals</em> represents the amount of variability in the responses that has <em>not</em> been accounted for.</strong></p>
 </section>
 
