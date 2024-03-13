@@ -90,6 +90,14 @@ co2_life_twodecade <- co2life_joined|>
                              y2000_2019 = years_2000_2019
     )
   )
+
+#Averaging the data by country 
+avg_co2_life <- co2_life_twodecade |>
+  group_by(country, twodecade) |>
+  summarise(
+    avg_emissions = mean(emissions, na.rm = TRUE),
+    avg_life_exp = mean(life_exp, na.rm = TRUE)
+  )
 ```
 
 ```{r}
