@@ -59,15 +59,7 @@ We started by cleaning the data sets. For the CO2 emissions data set, the negati
 
 ## Data Visualization
 
--   Present and discuss the visualizations of the relationship between the variables
-
--   Describe the statistical method used – linear regression
-
--   Present the estimated regression model (in notation)
-
--   Interpret the Linear Regression coefficients (in context)
-
--   Describe the fit of the regression model (both table and written format)
+To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
 
 ```{r}
 #Seperating the data into 20 year chunks
@@ -103,12 +95,14 @@ avg_co2_life <- co2_life_twodecade |>
 
 ```
 
+Next to get a clearer picture of the relationship between our quantitative variables we averaged out both life expectancy and CO2 emissions by country and 20 year period and re-graphed our plot with a line showing the linear regression relationship between variables.
+
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
 
 co2_life_twodecade|>
   ggplot(
-    aes( x = emissions, y = life_exp)
+    aes( x = emissions, y = life_exp, color = twodecade)
   ) +
   geom_point(size = 0.8, alpha = 0.5) +
   facet_wrap(~factor(twodecade))+
@@ -118,22 +112,31 @@ co2_life_twodecade|>
     subtitle = "Life Expectancy", 
     y = "", 
     x = "CO2 Emissions"
-  )
+  )+
+  theme(
+    legend.position = "bottom", 
+    plot.title = element_text(hjust = 0.5), 
+    plot.subtitle = element_text(hjust = 0.5) 
+  ) +
+  scale_color_viridis_d(
+    name = "Period", 
+    guide = guide_legend(title = "Two-Decade Period")
+    )
 ```
 
 ```{r}
 #The relationship between the two quantitative variables you are investigating.
-co2_life_twodecade %>%
-  ggplot(aes(x = emissions, y = life_exp, color = twodecade)) + # Color by twodecade
-  geom_point(size = 0.8, alpha = 0.5) + # Points with slightly reduced opacity for clarity
-  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + # Add linear model lines per twodecade
-  facet_wrap(~factor(twodecade)) + # Separate plots for each twodecade
-  theme_minimal() + # Using a minimal theme for cleaner visuals
+avg_co2_life %>%
+  ggplot(aes(x = avg_emissions, y = avg_life_exp, color = twodecade)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
+  facet_wrap(~factor(twodecade)) + 
+  theme_bw() + 
   labs(
     title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
-    subtitle = "Analyzed across different two-decade periods",
+    subtitle = "Life Expectancy (years)",
     x = "CO2 Emissions (metric tons per capita)",
-    y = "Life Expectancy (years)",
+    y = "",
     caption = "Data grouped by two-decade periods to illustrate changes over time."
   ) +
   theme(
@@ -141,10 +144,13 @@ co2_life_twodecade %>%
     plot.title = element_text(hjust = 0.5), # Center-align the title
     plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
   ) +
+<<<<<<< HEAD
   scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period")) # Use Viridis color scale for clarity
-```
+=======
+  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
 
-**Hint: In investigating this relationship, you may want to first average over the years for each country (i.e., one observational row per country since our independence condition would be violated).**
+>>>>>>> a99dfc4e4bfff55afb6e10bf0594f572f27eb4b3
+```
 
 ## Linear Regression
 
@@ -155,7 +161,11 @@ mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 summary(mod_co2life)
 ```
 
-Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
+From this regression we get the equation: avg_life_exp = 56.405726 + 0.007071avg_emissions
+
+This is surprising since it is contradictory to our hypothesized result. The intercept coefficient means if there were no CO2 emissions then the average life expectancy for people at birth would be around 56 years, while the coefficient of 0.007 on our avg_emissions variable means with each million tonne increase in average CO2 emissions average life expectancy *increases* by 0.007 years.
+
+## Model Fit
 
 ```{r}
 augment(mod_co2life) %>% 
@@ -165,4 +175,4 @@ augment(mod_co2life) %>%
             )
 ```
 
-**Hint: The goal of regression is to account for as much variability in the *response* values as we can. Here, the variance in the *fitted values* represents the amount of variability in the response that was accounted for by the explanatory variable. The variance in the *residuals* represents the amount of variability in the responses that has *not* been accounted for.**
+There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
