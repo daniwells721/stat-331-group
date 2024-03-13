@@ -134,16 +134,15 @@ co2_life_twodecade|>
 Your final report should present the estimated regression model *and* provide an interpretation for each of the coefficients output.
 
 ```{r}
-mod_co2life <- lm(life_exp ~ emissions, data = co2life_joined)
+mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 summary(mod_co2life)
 ```
-
 
 Discuss the proportion of the variability in the response values that was accounted for by your regression model. What does this suggest about the “quality” of your model?
 
 ```{r}
 augment(mod_co2life) %>% 
-  summarize(life_re = var(life_exp), 
+  summarize(life_re = var(avg_life_exp), 
             life_fitt = var(.fitted),
             life_resid = var(.resid)
             )
