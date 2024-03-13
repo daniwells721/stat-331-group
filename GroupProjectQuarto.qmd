@@ -89,7 +89,7 @@ co2_life_twodecade <- co2life_joined|>
                              y1980_1999 = years_1980_1999,
                              y2000_2019 = years_2000_2019
     )
-  )
+  ) 
 ```
 
 ```{r}
