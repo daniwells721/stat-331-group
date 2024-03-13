@@ -77,13 +77,13 @@ years_1960_1979 <- as.character(seq(1960, 1979))
 years_1980_1999 <- as.character(seq(1980, 1999))
 years_2000_2019 <- as.character(seq(2000, 2019))
 
-co2_life_twodecade <- co2life_clean|>
+co2_life_twodecade <- co2life_joined|>
   mutate(
     year = as.factor(year)
   )|>
   mutate(
     twodecade = fct_collapse(year, 
-                             y1920_1940 = years_1920_1940,
+                             y1920_1940 = years_1920_1939,
                              y1940_1959 = years_1940_1959,
                              y1960_1979 = years_1960_1979,
                              y1980_1999 = years_1980_1999,
@@ -101,7 +101,13 @@ co2_life_twodecade|>
   ) +
   geom_point(size = 0.8, alpha = 0.5) +
   facet_wrap(~factor(twodecade))+
-  theme_bw()
+  theme_bw()+
+  labs(
+    title = "Scatterplot of CO2 emissions Vs. Life Expectancy", 
+    subtitle = "Life Expectancy", 
+    y = "", 
+    x = "CO2 Emissions"
+  )
 ```
 
 ```{r}
