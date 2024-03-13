@@ -16,13 +16,16 @@ execute:
 library(tidyverse)
 library(here)
 library(broom)
+library(patchwork)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
 
 ## Data and Variable Descriptions
 
-As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries. Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
+As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries.  
+
+Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
 
 We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.), “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
 
@@ -172,3 +175,81 @@ augment(mod_co2life) %>%
 ```
 
 There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
+
+## Predictive checks
+```{r}
+mod_co2life_predict <- predict(mod_co2life) 
+head(mod_co2life_predict)
+```
+```{r}
+summary(mod_co2life)
+```
+```{r}
+mod_co2life_sigma <- sigma(mod_co2life)
+mod_co2life_sigma
+```
+
+```{r}
+noise <- function(x, mean = 0, sd) {
+  x + rnorm(length(x),
+            mean, 
+            sd)
+}
+```
+
+```{r}
+sim_response <- tibble(sim_life_exp = noise(mod_co2life_predict,
+                                            sd = mod_co2life_sigma))
+head(sim_response)
+```
+```{r}
+sim_data <- avg_co2_life %>% 
+  filter(!is.na(avg_life_exp),
+         !is.na(avg_emissions)) %>% 
+  cbind(sim_response)
+```
+
+```{r}
+obs_reg_avgco2life <- avg_co2_life %>%
+  ggplot(aes(x = avg_emissions, y = avg_life_exp, color = twodecade)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
+  facet_wrap(~factor(twodecade)) + 
+  theme_bw() + 
+  labs(
+    title = "Observed Life Expectancy over Time",
+    subtitle = "Life Expectancy (years)",
+    x = "CO2 Emissions (metric tons per capita)",
+    y = ""
+  ) +
+  theme(
+    legend.position = "bottom", # Adjust legend position for clarity
+    plot.title = element_text(hjust = 0.5)#, # Center-align the title
+  #  plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
+  )# +
+#  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
+
+sim_reg_avgco2life <- sim_data %>%
+  ggplot(aes(x = avg_emissions, y = sim_life_exp, color = twodecade)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
+  facet_wrap(~factor(twodecade)) + 
+  theme_bw() + 
+  labs(
+    title = "Simulated Life Expectancy over Time \nbased on Regression Model",
+    subtitle = "Life Expectancy (years)",
+    x = "CO2 Emissions (metric tons per capita)",
+    y = "",
+    caption = "Data grouped by two-decade periods to illustrate changes over time."
+  ) +
+  theme(
+    legend.position = "bottom", # Adjust legend position for clarity
+    plot.title = element_text(hjust = 0.5)#, # Center-align the title
+    #plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
+  )# +
+  #scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period")) #+ 
+  
+
+obs_reg_avgco2life + sim_reg_avgco2life
+```
+
