@@ -314,11 +314,12 @@ simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2
   return(rsquared)
 }
 
-# Set seed for reproducibility
-set.seed(2003)
 ```
 
 ```{r}
+# Set seed for reproducibility
+set.seed(2003)
+
 r_squared_values <- map_dbl(1:1000, ~simulate_and_regress(mod_co2life_predict, mod_co2life_sigma, avg_co2_life))
 
 r_squared_values %>%
