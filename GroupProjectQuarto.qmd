@@ -23,7 +23,7 @@ lex_data <- read_csv(here::here("lex.csv"))
 
 ## Introduction
 
-As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries.  
+As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries.
 
 Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
 
@@ -57,6 +57,7 @@ lex_clean <- lex_data %>%
 ```{r}
 co2life_joined <- inner_join(CO2_emissions_clean, lex_clean)
 ```
+
 ```{r}
 #Seperating the data into 20 year chunks
 years_1920_1939 <- as.character(seq(1920, 1939))
@@ -91,16 +92,15 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 ```
 
+We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
 
-We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.  
+To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
 
-To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.  
+In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model.
 
-In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model.  
+Once we had the orignal data graphed and had created a linear regression model, we used the model to do predictive checks to see if it was a good fit.
 
-Once we had the orignal data graphed and had created a linear regression model, we used the model to do predictive checks to see if it was a good fit. 
-
-## Results 
+## Results
 
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
@@ -169,16 +169,17 @@ avg_co2_life %>%
     plot.title = element_text(hjust = 0.5)
     )
 ```
-Based on the scatterplot, there appears to be a slightly parabolic, negative relationship between average CO2 emissions and average life expectancy.  
+
+Based on the scatterplot, there appears to be a slightly parabolic, negative relationship between average CO2 emissions and average life expectancy.
 
 ```{r}
 mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 tidy(mod_co2life)
 ```
 
-From this regression we got the equation: predicted avg_life_exp = 56.41 + 0.01(avg_emissions)  
+From this regression we got the equation: predicted avg_life_exp = 56.41 + 0.01(avg_emissions)
 
-Based on this equation, the predicted average life expectancy of someone who was not exposed to any carbon emissions would be approximately 56.57 years. Additionally, for each additional metric ton increase in average CO2 emissions per capita, the predicted average life expectancy increases by 0.01 years. 
+Based on this equation, the predicted average life expectancy of someone who was not exposed to any carbon emissions would be approximately 56.57 years. Additionally, for each additional metric ton increase in average CO2 emissions per capita, the predicted average life expectancy increases by 0.01 years.
 
 #### Model Fit
 
@@ -190,11 +191,12 @@ augment(mod_co2life) %>%
             )
 ```
 
-There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.  
+There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
 
-Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations.  
+Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations.
 
 #### Predictive checks
+
 ```{r}
 mod_co2life_predict <- predict(mod_co2life) 
 ```
@@ -256,3 +258,64 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
+#### **Generating Multiple Predictive Checks**
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+
+
+sim_data|>
+  ggplot(aes(x = sim_life_exp, y = avg_life_exp)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  theme_bw() + 
+  labs(
+    title = "Similarity of Simulated and Observed Life Expectancy",
+    subtitle = "Observed Average Life Expectancy (years)",
+    x = "Simulated Average Life Expectancy (years)",
+    y = "") +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+comparison_mod <- lm(avg_life_exp ~ sim_life_exp, data = sim_data)
+comparison_rsquared <- summary(comparison_mod)$r.squared
+```
+
+```{r}
+simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2_life) {
+  # Generate sim data
+  sim_response_rep <- tibble(sim_life_exp = noise(mod_co2life_predict, sd = mod_co2life_sigma))
+  
+  # Combine with observed data
+  sim_data_rep <- avg_co2_life %>% 
+    filter(!is.na(avg_life_exp), 
+           !is.na(avg_emissions)) %>% 
+    cbind(sim_response_rep)
+  
+  # Perform linear regression and save R-squared
+  lm_model <- lm(avg_life_exp ~ sim_life_exp, data = sim_data_rep)
+  rsquared <- summary(lm_model)$r.squared
+  
+  return(rsquared)
+}
+
+# Set seed for reproducibility
+set.seed(2003)
+```
+
+```{r}
+r_squared_values <- map_dbl(1:1000, ~simulate_and_regress(mod_co2life_predict, mod_co2life_sigma, avg_co2_life))
+
+r_squared_values %>%
+  tibble(rsquared = r_squared_values)%>%
+  ggplot(
+    aes(x = rsquared)
+  ) +
+  geom_histogram(binwidth = 0.01, fill = "steelblue", color = "black") +
+  labs(title = "Distribution of R-Squared Values for Predictive Checks",
+       x = "R-Squared",
+       y = "",
+       subtitle = "Frequency")
+```
