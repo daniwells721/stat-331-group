@@ -144,12 +144,9 @@ avg_co2_life %>%
     plot.title = element_text(hjust = 0.5), # Center-align the title
     plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
   ) +
-<<<<<<< HEAD
-  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period")) # Use Viridis color scale for clarity
-=======
+
   scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
 
->>>>>>> a99dfc4e4bfff55afb6e10bf0594f572f27eb4b3
 ```
 
 ## Linear Regression
