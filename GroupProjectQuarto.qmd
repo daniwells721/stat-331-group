@@ -17,6 +17,7 @@ library(tidyverse)
 library(here)
 library(broom)
 library(patchwork)
+library(DT)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
@@ -256,6 +257,18 @@ sim_reg_avgco2life <- sim_data %>%
   )
 
 obs_reg_avgco2life + sim_reg_avgco2life
+```
+
+```{r}
+datatable(sim_data,  class = 'cell-border stripe hover order-column',
+          colnames = c("Country" = "country", 
+                       "Average Emissions" = "avg_emissions",
+                       "Observed Average Life Expectancy" = "avg_life_exp",
+                       "Simulated Average Life Expectancy" = "sim_life_exp"),
+          caption = "Table 2: A comparison between the Observed data from Gapminder and the data we have simulated",
+          filter = "top"
+          )
+
 ```
 
 #### **Generating Multiple Predictive Checks**
