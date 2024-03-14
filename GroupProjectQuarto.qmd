@@ -98,19 +98,18 @@ In order to analyze the data sets, we started by cleaning them. For the CO2 emis
 
 To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
 
-In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model. We also ran a simulation and generated a regression using the simulated data. We also conducted predictive checks to see if the model worked for our data. 
+In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model. We also ran a simulation and generated a regression using the simulated data. We also conducted predictive checks to see if the model worked for our data.
 
 ## Results
 
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
 
-co2_life_twodecade|>
+animate_plot <- co2_life_twodecade|>
   ggplot(
     aes( x = emissions, y = life_exp)
   ) +
-  geom_point(size = 0.8, alpha = 0.5) +
-  facet_wrap(~factor(twodecade))+
+  geom_point(size = 0.8, alpha = 0.5, color = "forestgreen") +
   theme_bw() +
   labs(
     title = "Scatterplot of CO2 emissions Vs. Life Expectancy", 
@@ -121,7 +120,18 @@ co2_life_twodecade|>
   theme(
     legend.position = "bottom", 
     plot.title = element_text(hjust = 0.5)
-  ) #+
+  ) +
+  transition_states(
+    twodecade,
+    transition_length = 2,
+    state_length = 5
+  ) +
+  ease_aes(y = 'cubic-in-out') +
+  enter_fade() + 
+  exit_fade()
+
+animate(animate_plot, renderer = gifski_renderer())
+#+
   #scale_color_viridis_d(
     #name = "Period", 
     #guide = guide_legend(title = "Two-Decade Period")
@@ -274,7 +284,8 @@ datatable(sim_data,  class = 'cell-border stripe hover order-column',
 ```
 
 #### Multiple Predictive Checks
-Once we had the side-by-side plots of the observed and simulated data, we also decided to run multiple predictive checks to see if the model was a good fit for our data. 
+
+Once we had the side-by-side plots of the observed and simulated data, we also decided to run multiple predictive checks to see if the model was a good fit for our data.
 
 ```{r}
 #| fig-width: 5
@@ -337,6 +348,7 @@ r_squared_values %>%
        subtitle = "Frequency") + 
   theme_bw()
 ```
-## Discussion 
 
-## Conclusion 
+## Discussion
+
+## Conclusion
