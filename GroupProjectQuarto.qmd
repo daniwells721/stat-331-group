@@ -150,8 +150,11 @@ avg_co2_life %>%
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
   theme(
-    plot.title = element_text(hjust = 0.5)
-    )# Center-align the title) 
+    legend.position = "bottom", # Adjust legend position for clarity
+    plot.title = element_text(hjust = 0.5), # Center-align the title
+    plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
+  ) +
+  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
 ```
 
 #### Linear Regression
