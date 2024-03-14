@@ -146,23 +146,6 @@ avg_co2_life <- co2life_joined |>
     avg_emissions = mean(emissions, na.rm = TRUE),
     avg_life_exp = mean(life_exp, na.rm = TRUE)
   )
-
-
-avg_co2_life %>%
-  ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
-  geom_point(size = 0.8, alpha = 0.5) +
-  theme_bw() + 
-  labs(
-    title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
-    subtitle = "Average Life Expectancy (years)",
-    x = "Average CO2 Emissions (million tonnes per capita)",
-    y = "") +
-  theme(
-    legend.position = "bottom", # Adjust legend position for clarity
-    plot.title = element_text(hjust = 0.5), # Center-align the title
-    plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
-  ) +
-  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
 ```
 
 #### Linear Regression
@@ -216,7 +199,6 @@ mod_co2life_predict <- predict(mod_co2life)
 
 ```{r}
 mod_co2life_sigma <- sigma(mod_co2life)
-mod_co2life_sigma
 ```
 
 ```{r}
@@ -271,41 +253,11 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
-```{r}
-datatable(sim_data,  class = 'cell-border stripe hover order-column',
-          colnames = c("Country" = "country", 
-                       "Average Emissions" = "avg_emissions",
-                       "Observed Average Life Expectancy" = "avg_life_exp",
-                       "Simulated Average Life Expectancy" = "sim_life_exp"),
-          caption = "Table 2: A comparison between the Observed data from Gapminder and the data we have simulated",
-          filter = "top"
-          )
-
-```
 
 #### Multiple Predictive Checks
 
 Once we had the side-by-side plots of the observed and simulated data, we also decided to run multiple predictive checks to see if the model was a good fit for our data.
 
-```{r}
-#| fig-width: 5
-#| fig-height: 5
-
-
-sim_data|>
-  ggplot(aes(x = sim_life_exp, y = avg_life_exp)) + 
-  geom_point(size = 0.8, alpha = 0.5) + 
-  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
-  theme_bw() + 
-  labs(
-    title = "Similarity of Simulated and Observed Life Expectancy",
-    subtitle = "Observed Average Life Expectancy (years)",
-    x = "Simulated Average Life Expectancy (years)",
-    y = "") +
-  theme(
-    plot.title = element_text(hjust = 0.5)
-  )
-```
 
 ```{r}
 simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2_life) {
@@ -350,5 +302,16 @@ r_squared_values %>%
 ```
 
 ## Discussion
+```{r}
+datatable(sim_data,  class = 'cell-border stripe hover order-column',
+          colnames = c("Country" = "country", 
+                       "Average Emissions" = "avg_emissions",
+                       "Observed Average Life Expectancy" = "avg_life_exp",
+                       "Simulated Average Life Expectancy" = "sim_life_exp"),
+          caption = "Table 2: A comparison between the Observed data from Gapminder and the data we have simulated",
+          filter = "top"
+          )
+
+```
 
 ## Conclusion
