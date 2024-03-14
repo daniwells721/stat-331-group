@@ -18,6 +18,7 @@ library(here)
 library(broom)
 library(patchwork)
 library(DT)
+library(gganimate)
 CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
