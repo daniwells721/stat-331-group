@@ -21,13 +21,13 @@ CO2_emissions <- read_csv(here::here("co2_cons.csv"))
 lex_data <- read_csv(here::here("lex.csv"))
 ```
 
-## Data and Variable Descriptions
+## Introduction
 
 As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries.  
 
 Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
 
-We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.), “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
+We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.) which found that, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
 
 ## Methods
 
@@ -57,13 +57,6 @@ lex_clean <- lex_data %>%
 ```{r}
 co2life_joined <- inner_join(CO2_emissions_clean, lex_clean)
 ```
-
-We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
-
-## Data Visualization
-
-To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
-
 ```{r}
 #Seperating the data into 20 year chunks
 years_1920_1939 <- as.character(seq(1920, 1939))
@@ -89,7 +82,7 @@ co2_life_twodecade <- co2life_joined|>
 
 
 #Averaging the data by country 
-avg_co2_life <- co2_life_twodecade |>
+avg_co2_life_twodecade <- co2_life_twodecade |>
   group_by(country, twodecade) |>
   summarise(
     avg_emissions = mean(emissions, na.rm = TRUE),
@@ -98,73 +91,96 @@ avg_co2_life <- co2_life_twodecade |>
 
 ```
 
-Next to get a clearer picture of the relationship between our quantitative variables we averaged out both life expectancy and CO2 emissions by country and 20 year period and re-graphed our plot with a line showing the linear regression relationship between variables.
+
+We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.  
+
+To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.  
+
+In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model.  
+
+Once we had the orignal data graphed and had created a linear regression model, we used the model to do predictive checks to see if it was a good fit. 
+
+## Results 
 
 ```{r}
 #The relationship between the two quantitative variables changing over time. Get creative!
 
 co2_life_twodecade|>
   ggplot(
-    aes( x = emissions, y = life_exp, color = twodecade)
+    aes( x = emissions, y = life_exp)
   ) +
   geom_point(size = 0.8, alpha = 0.5) +
   facet_wrap(~factor(twodecade))+
-  theme_bw()+
+  theme_bw() +
   labs(
     title = "Scatterplot of CO2 emissions Vs. Life Expectancy", 
-    subtitle = "Life Expectancy", 
+    subtitle = "Life Expectancy (years)", 
     y = "", 
-    x = "CO2 Emissions"
-  )+
+    x = "CO2 Emissions (million tonnes per capita)"
+  ) +
   theme(
     legend.position = "bottom", 
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5) 
-  ) +
-  scale_color_viridis_d(
-    name = "Period", 
-    guide = guide_legend(title = "Two-Decade Period")
-    )
+    plot.title = element_text(hjust = 0.5)
+  ) #+
+  #scale_color_viridis_d(
+    #name = "Period", 
+    #guide = guide_legend(title = "Two-Decade Period")
+    #)
 ```
 
 ```{r}
 #The relationship between the two quantitative variables you are investigating.
+avg_co2_life <- co2life_joined |>
+  group_by(country) |>
+  summarise(
+    avg_emissions = mean(emissions, na.rm = TRUE),
+    avg_life_exp = mean(life_exp, na.rm = TRUE)
+  )
+
+
 avg_co2_life %>%
-  ggplot(aes(x = avg_emissions, y = avg_life_exp, color = twodecade)) + 
-  geom_point(size = 0.8, alpha = 0.5) + 
-  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
-  facet_wrap(~factor(twodecade)) + 
+  ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
+  geom_point(size = 0.8, alpha = 0.5) +
   theme_bw() + 
   labs(
     title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
-    subtitle = "Life Expectancy (years)",
-    x = "CO2 Emissions (metric tons per capita)",
-    y = "",
-    caption = "Data grouped by two-decade periods to illustrate changes over time."
-  ) +
+    subtitle = "Average Life Expectancy (years)",
+    x = "Average CO2 Emissions (million tonnes per capita)",
+    y = "") +
   theme(
-    legend.position = "bottom", # Adjust legend position for clarity
-    plot.title = element_text(hjust = 0.5), # Center-align the title
-    plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
-  ) +
-  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
-
+    plot.title = element_text(hjust = 0.5)
+    )# Center-align the title) 
 ```
 
-## Linear Regression
+#### Linear Regression
 
-Your final report should present the estimated regression model *and* provide an interpretation for each of the coefficients output.
+```{r}
+avg_co2_life %>%
+  ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
+  geom_point(size = 0.8, alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() + 
+  labs(
+    title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
+    subtitle = "Average Life Expectancy (years)",
+    x = "Average CO2 Emissions (million tonnes per capita)",
+    y = "") +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+    )
+```
+Based on the scatterplot, there appears to be a slightly parabolic, negative relationship between average CO2 emissions and average life expectancy.  
 
 ```{r}
 mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
-summary(mod_co2life)
+tidy(mod_co2life)
 ```
 
-From this regression we get the equation: avg_life_exp = 56.405726 + 0.007071avg_emissions
+From this regression we got the equation: predicted avg_life_exp = 56.41 + 0.01(avg_emissions)  
 
-This is surprising since it is contradictory to our hypothesized result. The intercept coefficient means if there were no CO2 emissions then the average life expectancy for people at birth would be around 56 years, while the coefficient of 0.007 on our avg_emissions variable means with each million tonne increase in average CO2 emissions average life expectancy *increases* by 0.007 years.
+Based on this equation, the predicted average life expectancy of someone who was not exposed to any carbon emissions would be approximately 56.57 years. Additionally, for each additional metric ton increase in average CO2 emissions per capita, the predicted average life expectancy increases by 0.01 years. 
 
-## Model Fit
+#### Model Fit
 
 ```{r}
 augment(mod_co2life) %>% 
@@ -174,16 +190,15 @@ augment(mod_co2life) %>%
             )
 ```
 
-There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
+There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.  
 
-## Predictive checks
+Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations.  
+
+#### Predictive checks
 ```{r}
 mod_co2life_predict <- predict(mod_co2life) 
-head(mod_co2life_predict)
 ```
-```{r}
-summary(mod_co2life)
-```
+
 ```{r}
 mod_co2life_sigma <- sigma(mod_co2life)
 mod_co2life_sigma
@@ -200,8 +215,8 @@ noise <- function(x, mean = 0, sd) {
 ```{r}
 sim_response <- tibble(sim_life_exp = noise(mod_co2life_predict,
                                             sd = mod_co2life_sigma))
-head(sim_response)
 ```
+
 ```{r}
 sim_data <- avg_co2_life %>% 
   filter(!is.na(avg_life_exp),
@@ -211,44 +226,32 @@ sim_data <- avg_co2_life %>%
 
 ```{r}
 obs_reg_avgco2life <- avg_co2_life %>%
-  ggplot(aes(x = avg_emissions, y = avg_life_exp, color = twodecade)) + 
+  ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
-  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
-  facet_wrap(~factor(twodecade)) + 
+  geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Observed Life Expectancy over Time",
-    subtitle = "Life Expectancy (years)",
-    x = "CO2 Emissions (metric tons per capita)",
-    y = ""
-  ) +
+    title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
+    subtitle = "Average Life Expectancy (years)",
+    x = "Average CO2 Emissions (million tonnes per capita)",
+    y = "") +
   theme(
-    legend.position = "bottom", # Adjust legend position for clarity
-    plot.title = element_text(hjust = 0.5)#, # Center-align the title
-  #  plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
-  )# +
-#  scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
+    plot.title = element_text(hjust = 0.5)
+    )
 
 sim_reg_avgco2life <- sim_data %>%
-  ggplot(aes(x = avg_emissions, y = sim_life_exp, color = twodecade)) + 
+  ggplot(aes(x = avg_emissions, y = sim_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
-  geom_smooth(method = "lm", se = FALSE, aes(color = twodecade)) + 
-  facet_wrap(~factor(twodecade)) + 
+  geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Simulated Life Expectancy over Time \nbased on Regression Model",
-    subtitle = "Life Expectancy (years)",
-    x = "CO2 Emissions (metric tons per capita)",
-    y = "",
-    caption = "Data grouped by two-decade periods to illustrate changes over time."
-  ) +
+    title = "Simulated Average Life Expectancy over Time \nbased on Regression Model",
+    subtitle = "Simulated Average Life Expectancy (years)",
+    x = "Average CO2 Emissions (million tonnes per capita)",
+    y = "") +
   theme(
-    legend.position = "bottom", # Adjust legend position for clarity
-    plot.title = element_text(hjust = 0.5)#, # Center-align the title
-    #plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
-  )# +
-  #scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period")) #+ 
-  
+    plot.title = element_text(hjust = 0.5)
+  )
 
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
