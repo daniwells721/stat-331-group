@@ -155,10 +155,7 @@ avg_co2_life %>%
     plot.title = element_text(hjust = 0.5), # Center-align the title
     plot.subtitle = element_text(hjust = 0.5) # Center-align the subtitle
   ) +
-
   scale_color_viridis_d(name = "Period", guide = guide_legend(title = "Two-Decade Period"))
-
-    plot.title = element_text(hjust = 0.5) # Center-align the title) 
 ```
 
 #### Linear Regression
@@ -322,11 +319,12 @@ simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2
   return(rsquared)
 }
 
-# Set seed for reproducibility
-set.seed(2003)
 ```
 
 ```{r}
+# Set seed for reproducibility
+set.seed(2003)
+
 r_squared_values <- map_dbl(1:1000, ~simulate_and_regress(mod_co2life_predict, mod_co2life_sigma, avg_co2_life))
 
 r_squared_values %>%
