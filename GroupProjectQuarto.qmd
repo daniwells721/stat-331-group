@@ -94,13 +94,11 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 ```
 
-We started by cleaning the data sets. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to be able to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emisssions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy comibination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
+In order to analyze the data sets, we started by cleaning them. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emissions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy combination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
 
 To visualize the relationship between CO2 emissions and life expectancy at birth we can use a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis.
 
-In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model.
-
-Once we had the orignal data graphed and had created a linear regression model, we used the model to do predictive checks to see if it was a good fit.
+In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model. We also ran a simulation and generated a regression using the simulated data. We also conducted predictive checks to see if the model worked for our data. 
 
 ## Results
 
@@ -275,7 +273,8 @@ datatable(sim_data,  class = 'cell-border stripe hover order-column',
 
 ```
 
-#### **Generating Multiple Predictive Checks**
+#### Multiple Predictive Checks
+Once we had the side-by-side plots of the observed and simulated data, we also decided to run multiple predictive checks to see if the model was a good fit for our data. 
 
 ```{r}
 #| fig-width: 5
@@ -295,9 +294,6 @@ sim_data|>
   theme(
     plot.title = element_text(hjust = 0.5)
   )
-
-comparison_mod <- lm(avg_life_exp ~ sim_life_exp, data = sim_data)
-comparison_rsquared <- summary(comparison_mod)$r.squared
 ```
 
 ```{r}
@@ -321,6 +317,9 @@ simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2
 ```
 
 ```{r}
+comparison_mod <- lm(avg_life_exp ~ sim_life_exp, data = sim_data)
+comparison_rsquared <- summary(comparison_mod)$r.squared
+
 # Set seed for reproducibility
 set.seed(2003)
 
@@ -335,5 +334,9 @@ r_squared_values %>%
   labs(title = "Distribution of R-Squared Values for Predictive Checks",
        x = "R-Squared",
        y = "",
-       subtitle = "Frequency")
+       subtitle = "Frequency") + 
+  theme_bw()
 ```
+## Discussion 
+
+## Conclusion 
