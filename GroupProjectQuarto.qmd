@@ -190,7 +190,7 @@ mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 tidy(mod_co2life)
 ```
 
-From this regression we got the equation: predicted $AvgLifeExpectancy = 56.41 + 0.01(AvgEmissions)$
+From this regression we got the equation: $\widehat {AvgLifeExpectancy} = 56.41 + 0.01(AvgEmissions)$
 
 Based on this equation, the predicted average life expectancy of someone who was not exposed to any carbon emissions would be approximately 56.57 years. Additionally, for each additional metric ton increase in average CO2 emissions per capita, the predicted average life expectancy increases by 0.01 years.
 
