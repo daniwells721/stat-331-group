@@ -137,12 +137,12 @@ animate(animate_plot, renderer = gifski_renderer())
     #)
 ```
 
-From this graph we observe that most country's CO2 emissions and life expectancy at birth have increased. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries.
+From this graph we observe that most country's CO2 emissions and life expectancy at birth have increased. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We can also see that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observe in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2.  
 
 
 #### Linear Regression
 
-In order to get a better idea of how the relationship life expectancy and CO2 emissions by country, we took the average of both variables for each country and created a scatterplot. It was then fitted with a line to show the linear regression model. We also ran a simulation and generated a regression using the simulated data. We also conducted predictive checks to see if the model worked for our data.
+To get a clearer picture of how life expectancy relates to CO2 emissions across countries, we took the average of both Life Expectancy and CO2 emissions for all years for each country and created a scatter plot of values. We also fitted a linear regression line to show the relationship we attain when regressing the average life expectancy of each country on it's average CO2 emissions. 
 
 ```{r}
 #The relationship between the two quantitative variables you are investigating.
@@ -168,26 +168,42 @@ avg_co2_life %>%
   theme(
     plot.title = element_text(hjust = 0.5)
     )
+
+influential_outliers <- avg_co2_life|>
+  filter(avg_emissions > 1000)
+
+datatable(influential_outliers, class = 'cell-border stripe hover order-column',
+          colnames = c("Country" = "country", 
+                       "Average Emissions" = "avg_emissions",
+                       "Average Life Expectancy" = "avg_life_exp"),
+          caption = "Table 1: Influential Outliers"
+)
+
 ```
 
-Based on the scatterplot, there appears to be a slightly parabolic, negative relationship between average CO2 emissions and average life expectancy.
+Based on this scatter plot we again observe that the relationship between life expectancy and CO2 emissions is very weak. However our linear regression shows a positive correlation between life expectancy and CO2 emissions, this is likely due to the extreme outliers in our data. As we can see from the data table both China and the united states have extremely high levels of average CO2 emissions and average life expectancy which would bias our estimate of the relationship between average life expectancy and average CO2 emissions.
 
 ```{r}
 mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
 tidy_co2life <- tidy(mod_co2life)
+
+tidy_co2life <- tidy_co2life|>
+  mutate(
+    across(estimate:p.value, ~round(.x, 3))
+  )
 
 datatable(tidy_co2life,  class = 'cell-border stripe hover',
           colnames = c("Coefficient Estimate" = "estimate", 
                        "Standard Error" = "std.error",
                        "T-Statistic" = "statistic",
                        "P-Value" = "p.value"),
-          caption = "Table 1: Estimated Coefficients of the Linear Regression of Average Life Expectancy on Average Emissions",
+          caption = "Table 2: Estimated Coefficients of the Linear Regression",
 )
 ```
 
-From this regression we got the equation: $\widehat {AvgLifeExpectancy} = 56.41 + 0.01(AvgEmissions)$
+From our linear regression of average life expectancy on average CO2 emissions we get the equation: $\widehat {AvgLifeExpectancy} = 56.41 + 0.01(AvgEmissions)$
 
-Based on this equation, the predicted average life expectancy of someone who was not exposed to any carbon emissions would be approximately 56.57 years. Additionally, for each additional metric ton increase in average CO2 emissions per capita, the predicted average life expectancy increases by 0.01 years.
+Based on this equation, the predicted average life expectancy of someone living in a country with no CO2 emissions would be approximately 56.41 years. Additionally, for each additional million tonne increase in average CO2 emissions per capita, predicted average life expectancy increases by 0.01 years.
 
 #### Model Fit
 
@@ -198,11 +214,16 @@ modfit_table <- augment(mod_co2life) %>%
             life_resid = var(.resid)
             )
 
+modfit_table <- modfit_table|>
+  mutate(
+    across(life_re:life_resid, ~round(.x, 3))
+  )
+
 datatable(modfit_table,  class = 'cell-border stripe hover',
           colnames = c("Variance in Life Expectancy" = "life_re", 
                        "Variance in Fitted Values" = "life_fitt",
                        "Variance in Residuals" = "life_resid"),
-          caption = "Table 2: Table of Varainces in our model to measure the fit of our model to the data.",
+          caption = "Table 3: Model Fit Variances",
 )
 ```
 
@@ -321,7 +342,12 @@ r_squared_values %>%
 ## Discussion
 
 ```{r}
-datatable(sim_data,  class = 'cell-border stripe hover order-column',
+sim_dataround <- sim_data|>
+  mutate(
+    across(avg_emissions:sim_life_exp, ~round(.x, 3))
+  )
+  
+datatable(sim_dataround,  class = 'cell-border stripe hover order-column',
           colnames = c("Country" = "country", 
                        "Average Emissions" = "avg_emissions",
                        "Observed Average Life Expectancy" = "avg_life_exp",
@@ -333,3 +359,6 @@ datatable(sim_data,  class = 'cell-border stripe hover order-column',
 ```
 
 ## Conclusion
+
+
+## References
