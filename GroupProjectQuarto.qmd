@@ -10,7 +10,6 @@ execute:
   echo: true
   message: false
   warning: false
-
 ---
 
 ```{r setup}
@@ -49,22 +48,16 @@ CO2_emissions_clean <- CO2_emissions %>%
   pivot_longer(cols = `1920`:`2019`,
                names_to = "year",
                values_to = "emissions")
-```
 
-```{r}
 lex_clean <- lex_data %>%
   select(country, `1920`:`2019`) %>%
   filter(if_all(c(`1920`:`2019`), ~ !is.na(.))) %>%
   pivot_longer(cols = `1920`:`2019`,
                names_to = "year",
                values_to = "life_exp")
-```
 
-```{r}
 co2life_joined <- inner_join(CO2_emissions_clean, lex_clean)
-```
 
-```{r}
 #Seperating the data into 20 year chunks
 years_1920_1939 <- as.character(seq(1920, 1939))
 years_1940_1959 <- as.character(seq(1940, 1959))
@@ -102,7 +95,7 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatterplot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate.
 
-REMEMBER TO PUT THE GG PLOT BACK IN 
+REMEMBER TO PUT THE GG PLOT BACK IN
 
 From this graph we observed that CO2 emissions and life expectancy at birth have increased for most most countries. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We also saw that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observed in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2.
 
@@ -198,6 +191,7 @@ There is a lot of variability in the actual average life expectancy values, whic
 Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations. Another way to check if it is a good model is through predictive checks.
 
 #### Predictive checks
+
 In order to measure the fit of our model to the data set we observe from Gapminder we can generate simulated data to compare to our observed. If there were a simple linear relation between average life expectancy and CO2 emissions we would assume that we could reproduce our observed data by predicting values from a normal fitted function and adding in normally distributed errors. Thus, we simulated a random normal distribution of data with the same standard deviation that we observed from our data set and then compared our observed data to our simulated data using two side by side scatter plots.
 
 ```{r}
@@ -252,7 +246,7 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
-We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side. 
+We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side.
 
 #### Multiple Predictive Checks
 
