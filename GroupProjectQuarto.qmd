@@ -255,7 +255,11 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
+<<<<<<< HEAD
 We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated normally distributed data we see that the simulated data points are clustered around an average life expectancy of 55 years instead of evenly distributed. From this we can observe that our data is not likely normally.
+=======
+We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side. 
+>>>>>>> 3dc1bc3fbc8e2d38c28d07de571c163ff3aa44b8
 
 #### Multiple Predictive Checks
 
@@ -321,5 +325,11 @@ datatable(sim_dataround,  class = 'cell-border stripe hover order-column',
           )
 
 ```
+From our data set, we found that a linear regression was not a good model to use. Not only was the original data not meet the validity conditions for it, but when the simulated data was created based on the model it showed that the regression model did not accurately predict. Additionally, after running multiple predictive checks and recording the $R^2$, it was seen that a majority of the simulations had an $R^2$ of 0, meaning that 0% of the variability in average life expectancy was explained by the average CO2 emissions per capita.  
+
+In the observed data, a slightly negative parabolic relationship between average life expectancy and average CO2 emissions would make sense because up to a certain amount, increasing CO2 emissions would indicate that a country is doing better in terms of development. However to a certain extent the increase would start to be detrimental to peoples health.   
+
+Since the regression model did not fit the data set, it would be interesting to see what other models might better predict or account for the variance in average life expectancy. It should also be acknowledge though, that there are many different factors that influence the life expectancy of people, and it might be a very complicated model to try to build.
+
 
 ## Conclusion
