@@ -307,22 +307,6 @@ r_squared_values %>%
 
 ## Discussion
 
-```{r}
-sim_dataround <- sim_data|>
-  mutate(
-    across(avg_emissions:sim_life_exp, ~round(.x, 3))
-  )
-  
-datatable(sim_dataround,  class = 'cell-border stripe hover order-column',
-          colnames = c("Country" = "country", 
-                       "Average Emissions" = "avg_emissions",
-                       "Observed Average Life Expectancy" = "avg_life_exp",
-                       "Simulated Average Life Expectancy" = "sim_life_exp"),
-          caption = "Table 2: A comparison between the Observed data from Gapminder and the data we have simulated",
-          filter = "top"
-          )
-
-```
 From our data set, we found that a linear regression was not a good model to use. Not only did the original data not meet the validity conditions for it, but when the simulated data was created based on the model it showed that the regression model did not accurately predict average life expectancy. Additionally, after running multiple predictive checks and recording the $R^2$, it was seen that a majority of the simulations had an $R^2$ of 0, meaning that 0% of the variability in average life expectancy was explained by the average CO2 emissions per capita.  
 
 Since the regression model did not fit the data set, it would be interesting to see what other models might better predict or account for the variance in average life expectancy. It should also be acknowledge though, that there are many different factors that influence the life expectancy of people, and it might be a very complicated model to try to build.
