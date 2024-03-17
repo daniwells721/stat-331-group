@@ -232,6 +232,7 @@ There is a lot of variability in the actual average life expectancy values, whic
 Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations. Another way to check if it is a good model is through predictive checks.
 
 #### Predictive checks
+In order to measure the fit of our model to the dataset we observe from Gapminder. If there were a simple lineaer relation between average life expectancy and CO2 emissions we would assume that we could reproduce our observed data by predicting values from a normal fitted function and adding in normally distributed errors. Thus, we simulated a random normal distribution of data with the same standard deviation that we observed from our data set and then compared our observed data to our simulated data using two side by side scatterplots
 
 ```{r}
 mod_co2life_predict <- predict(mod_co2life) 
@@ -293,7 +294,7 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
-These predictive checks involved simulating data and then plotting it like normal. Then we created a side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork).
+We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). 
 
 #### Multiple Predictive Checks
 
