@@ -261,14 +261,14 @@ sim_data <- avg_co2_life %>%
   cbind(sim_response)
 ```
 
-```{r}
+```{r, fig.align = "center", fig.width = 8, fig.cap = "Comparison of Observed vs Simulated values for Life Expectancy Depending on CO2 Emissions."}
 obs_reg_avgco2life <- avg_co2_life %>%
   ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Scatterplot of CO2 Emissions vs. Life Expectancy over Time",
+    title = "Scatterplot of CO2 \nEmissions vs. Life Expectancy over Time",
     subtitle = "Average Life Expectancy (years)",
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
@@ -282,7 +282,7 @@ sim_reg_avgco2life <- sim_data %>%
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Simulated Average Life Expectancy over Time \nbased on Regression Model",
+    title = "Simulated Average Life Expectancy over \nTime based on Regression Model",
     subtitle = "Simulated Average Life Expectancy (years)",
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
