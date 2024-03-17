@@ -318,20 +318,20 @@ One of the major confounding variables that likely caused the major discrepancy 
 
 ## Citations
 
-Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” *Journal of Open Source Software*, *4*(43), 1686. doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
+  Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” *Journal of Open Source Software*, *4*(43), 1686. doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
 
-Müller K (2020). *here: A Simpler Way to Find Your Files*. R package version 1.0.1, <https://CRAN.R-project.org/package=here>.
+  Müller K (2020). *here: A Simpler Way to Find Your Files*. R package version 1.0.1, <https://CRAN.R-project.org/package=here>.
 
-Robinson D, Hayes A, Couch S (2023). *broom: Convert Statistical Objects into Tidy Tibbles*. R package version 1.0.5, <https://CRAN.R-project.org/package=broom>.
+  Robinson D, Hayes A, Couch S (2023). *broom: Convert Statistical Objects into Tidy Tibbles*. R package version 1.0.5, <https://CRAN.R-project.org/package=broom>.
 
-Pedersen T (2024). *patchwork: The Composer of Plots*. R package version 1.2.0, <https://CRAN.R-project.org/package=patchwork>.
+  Pedersen T (2024). *patchwork: The Composer of Plots*. R package version 1.2.0, <https://CRAN.R-project.org/package=patchwork>.
 
-Xie Y, Cheng J, Tan X (2024). *DT: A Wrapper of the JavaScript Library 'DataTables'*. R package version 0.32, <https://CRAN.R-project.org/package=DT>.
+  Xie Y, Cheng J, Tan X (2024). *DT: A Wrapper of the JavaScript Library 'DataTables'*. R package version 0.32, <https://CRAN.R-project.org/package=DT>.
 
-Pedersen T, Robinson D (2024). *gganimate: A Grammar of Animated Graphics*. R package version 1.0.9, <https://CRAN.R-project.org/package=gganimate>.
+  Pedersen T, Robinson D (2024). *gganimate: A Grammar of Animated Graphics*. R package version 1.0.9, <https://CRAN.R-project.org/package=gganimate>.
 
-Ooms J, Kornel Lesiński, Authors of the dependency Rust crates (2023). *gifski: Highest Quality GIF Encoder*. R package version 1.12.0-2, <https://CRAN.R-project.org/package=gifski>.
+  Ooms J, Kornel Lesiński, Authors of the dependency Rust crates (2023). *gifski: Highest Quality GIF Encoder*. R package version 1.12.0-2, <https://CRAN.R-project.org/package=gifski>.
 
-Rahman, MM, et al. “Determinants of Life Expectancy in Most Polluted Countries: Exploring the Effect of Environmental Degradation.” PubMed Central, National Library of Medicine, 21 Jan. 2022, [www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25](www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25). 
+  Rahman, MM, et al. “Determinants of Life Expectancy in Most Polluted Countries: Exploring the Effect of Environmental Degradation.” PubMed Central, National Library of Medicine, 21 Jan. 2022, [www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/](www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25).
 
-Li, Jing, et al. “The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators.” MDPI, Multidisciplinary Digital Publishing Institute, 28 Jan. 2023, [www.mdpi.com/1660-4601/20/3/2325](www.mdpi.com/1660-4601/20/3/2325).
+  Li, Jing, et al. “The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators.” MDPI, Multidisciplinary Digital Publishing Institute, 28 Jan. 2023, [www.mdpi.com/1660-4601/20/3/2325](www.mdpi.com/1660-4601/20/3/2325).
