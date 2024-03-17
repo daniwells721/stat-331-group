@@ -332,6 +332,6 @@ Pedersen T, Robinson D (2024). *gganimate: A Grammar of Animated Graphics*. R pa
 
 Ooms J, Kornel Lesiński, Authors of the dependency Rust crates (2023). *gifski: Highest Quality GIF Encoder*. R package version 1.12.0-2, <https://CRAN.R-project.org/package=gifski>.
 
-Rahman, Mohammad Mafizur, et al. “Determinants of Life Expectancy in Most Polluted Countries: Exploring the Effect of Environmental Degradation.” PubMed Central, National Library of Medicine, 21 Jan. 2022, [www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25](www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25). 
+Rahman, MM, et al. “Determinants of Life Expectancy in Most Polluted Countries: Exploring the Effect of Environmental Degradation.” PubMed Central, National Library of Medicine, 21 Jan. 2022, [www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25](www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25). 
 
 Li, Jing, et al. “The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators.” MDPI, Multidisciplinary Digital Publishing Institute, 28 Jan. 2023, [www.mdpi.com/1660-4601/20/3/2325](www.mdpi.com/1660-4601/20/3/2325).
