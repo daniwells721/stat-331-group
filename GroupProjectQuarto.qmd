@@ -10,7 +10,7 @@ execute:
   echo: true
   message: false
   warning: false
-bibliography: references.bib
+
 ---
 
 ```{r setup}
