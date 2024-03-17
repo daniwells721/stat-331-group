@@ -10,7 +10,6 @@ execute:
   echo: true
   message: false
   warning: false
-
 ---
 
 ```{r setup}
@@ -100,9 +99,9 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 ## Results
 
-To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatterplot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate.
+To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate.
 
-REMEMBER TO PUT THE GG PLOT BACK IN 
+REMEMBER TO PUT THE GG PLOT BACK IN
 
 From this graph we observed that CO2 emissions and life expectancy at birth have increased for most most countries. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We also saw that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observed in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2.
 
@@ -169,7 +168,7 @@ datatable(tidy_co2life,  class = 'cell-border stripe hover',
 
 From our linear regression of average life expectancy on average CO2 emissions we get the equation: $\widehat {Avg\,Life\,Expectancy} = 56.41 + 0.01(Avg\,Emissions)$
 
-Based on this equation, the predicted average life expectancy of someone living in a country with no CO2 emissions would be approximately 56.41 years. Additionally, for each additional 100 million tonne increase in average CO2 emissions per capita, predicted average life expectancy increases by 1 year.
+Based on this equation, the predicted average life expectancy of someone living in a country with no CO2 emissions would be approximately 56.41 years. Additionally, the coefficient on average emissions of 0.01 means that for each additional 100 million tonne increase in average CO2 emissions per capita, predicted average life expectancy increases by 1 year.
 
 #### Model Fit
 
@@ -198,6 +197,7 @@ There is a lot of variability in the actual average life expectancy values, whic
 Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations. Another way to check if it is a good model is through predictive checks.
 
 #### Predictive checks
+
 In order to measure the fit of our model to the data set we observe from Gapminder we can generate simulated data to compare to our observed. If there were a simple linear relation between average life expectancy and CO2 emissions we would assume that we could reproduce our observed data by predicting values from a normal fitted function and adding in normally distributed errors. Thus, we simulated a random normal distribution of data with the same standard deviation that we observed from our data set and then compared our observed data to our simulated data using two side by side scatter plots.
 
 ```{r}
@@ -227,7 +227,7 @@ obs_reg_avgco2life <- avg_co2_life %>%
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Scatterplot of CO2 \nEmissions vs. Life Expectancy over Time",
+    title = "Scatterplot of Observed CO2 \nEmissions vs. Life Expectancy over Time",
     subtitle = "Average Life Expectancy (years)",
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
@@ -252,7 +252,7 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
-We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side. 
+We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side.
 
 #### Multiple Predictive Checks
 
