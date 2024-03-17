@@ -1,5 +1,5 @@
 ---
-title: "GroupProjectQuarto"
+title: "Group Project Quarto"
 author: "Claire Savage, Dani Wells, Abby Drongpa"
 format: html
 editor: visual
@@ -34,7 +34,7 @@ We believe that increased levels of CO2 emissions per capita are correlated with
 
 ## Methods
 
-In order to analyze the data sets, we started by cleaning them with tidyverse. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emissions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy combination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
+In order to analyze the data sets, we started by cleaning them with tidyverse [@tidyverse2019].  For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emissions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy combination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
 
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
@@ -256,6 +256,7 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
+
 <br>
 We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we noticed a few differences between our observed and simulated data, with the biggest one being the concentration of data points around the y axis. In our observed data, the countries which have approximately 0 carbon emissions have average life expectancies that are fairly evenly distributed between 40 and 70 years of age, whereas in our simulated normally distributed data we see that the simulated data points are clustered around an average life expectancy of 55 years instead of evenly distributed. From this we can observe that our data is not likely normally.
 
@@ -310,8 +311,23 @@ From our data set, we found that a linear regression was not a good model to use
 
 Since the regression model did not fit the data set, it would be interesting to see what other models might better predict or account for the variance in average life expectancy. It should also be acknowledge though, that there are many different factors that influence the life expectancy of people, and it might be a very complicated model to try to build.  
 
-One of the major confounding variables that likely caused the major discrepancy between our predicted hypothesis and the observed relationship between life expectancy and CO2 emissions is a country's economic growth. Economic growth is heavily correlated with both life expectancy and CO2 emissions and since we did not include it in our model it introduces a lot of omitted variable bias. The article "[The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators](https://www.mdpi.com/1660-4601/20/3/2325)" (Li et al., 2023)  talks about the strong relationship between CO2 emissions and economic growth as well as the relationship between economic growth and life expectancy. From this we can see that the weak positive relationship between CO2 emissions and life expectancy is likely not a direct relationship and is instead a result of omitting GDP from our model. In actuality the relationship we are observing is the one where increases in economic growth and changes in policy increases CO2 emissions and this same economic growth is linked with an increases in positive health outcomes. 
 
 ## Conclusion
 
 In conclusion, our study on the relationship between life expectancy at birth and total CO2 emissions across 186 countries from 1920 to 2019 reveals a complex and unexpected dynamic between these variables. Despite predictions that higher CO2 emissions would correlate with lower life expectancies, our findings suggest that there is no direct linear correlation. Our linear regression model indicated a slight increase in life expectancy with rising CO2 emissions, yet the significant variability and the non-linearity of the observed data suggest that CO2 emissions alone are not a definitive factor in determining life expectancy. This study emphasizes the complexity of the factors which affect average life expectancy, and demonstrates the necessity for broader research to fully grasp these relationships.
+
+One of the major confounding variables that likely caused the major discrepancy between our predicted hypothesis and the observed relationship between life expectancy and CO2 emissions is a country's economic growth. Economic growth is heavily correlated with both life expectancy and CO2 emissions and since we did not include it in our model it introduces a lot of omitted variable bias. The article "[The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators](https://www.mdpi.com/1660-4601/20/3/2325)" (Li et al., 2023)  talks about the strong relationship between CO2 emissions and economic growth as well as the relationship between economic growth and life expectancy. From this we can see that the weak positive relationship between CO2 emissions and life expectancy is likely not a direct relationship and is instead a result of omitting GDP from our model. In actuality the relationship we are observing is the one where increases in economic growth and changes in policy increases CO2 emissions and this same economic growth is linked with an increases in positive health outcomes.
+
+## Citations
+
+```{r}
+citation("tidyverse")
+citation("here")
+citation("broom")
+citation("patchwork")
+citation("DT")
+citation("gganimate")
+citation("gifski")
+
+```
+
