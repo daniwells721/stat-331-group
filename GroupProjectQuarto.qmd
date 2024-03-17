@@ -35,7 +35,7 @@ We believe that increased levels of CO2 emission decrease life expectancy, which
 
 ## Methods
 
-In order to analyze the data sets, we started by cleaning them with tidyverse [@tidyverse-2]. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emissions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy combination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
+In order to analyze the data sets, we started by cleaning them with tidyverse. For the CO2 emissions data set, the negative values in Panama were encoded dashes, so we replaced them with regular dashes in order to convert those numbers to numeric values. The years in question, 1920-2019 were then selected and the table was pivoted to have each year and emission value combination with its own row. For the life expectancy data, we first selected the same years as the CO2 emissions (1920-2019), and then took out any NA values. We then pivoted the table so that it was in a similar format to the CO2 emissions, with each year and life expectancy combination in its own row. Once the individual data sets were properly formatted, we combined them so that for each country, there was a different row with the respective CO2 emissions and life expectancy values.
 
 ```{r}
 CO2_emissions_clean <- CO2_emissions %>%
@@ -100,7 +100,7 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 ## Results
 
-To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatterplot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate [@gganimate].
+To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatterplot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate.
 
 REMEMBER TO PUT THE GG PLOT BACK IN 
 
