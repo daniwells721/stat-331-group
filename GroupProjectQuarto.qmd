@@ -102,42 +102,7 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatterplot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate [@gganimate].
 
-```{r}
-#The relationship between the two quantitative variables changing over time. Get creative!
-
-animate_plot <- co2_life_twodecade|>
-  ggplot(
-    aes( x = emissions, y = life_exp)
-  ) +
-  geom_point(size = 0.8, alpha = 0.5, color = "forestgreen") +
-  theme_bw() +
-  labs(
-    title = "Scatterplot of CO2 emissions Vs. Life Expectancy", 
-    subtitle = "Life Expectancy (years)", 
-    y = "", 
-    x = "CO2 Emissions (million tonnes per capita)"
-  ) +
-  theme(
-    legend.position = "bottom", 
-    plot.title = element_text(hjust = 0.5)
-  ) +
-  transition_states(
-    twodecade,
-    transition_length = 5,
-    state_length = 25
-  ) +
-  ease_aes(y = 'cubic-in-out') +
-  enter_fade() + 
-  exit_fade()+
-  ggtitle('Now showing Years:{closest_state}')
-
-animate(animate_plot, renderer = gifski_renderer())
-#+
-  #scale_color_viridis_d(
-    #name = "Period", 
-    #guide = guide_legend(title = "Two-Decade Period")
-    #)
-```
+REMEMBER TO PUT THE GG PLOT BACK IN 
 
 From this graph we observed that CO2 emissions and life expectancy at birth have increased for most most countries. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We also saw that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observed in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2.
 
