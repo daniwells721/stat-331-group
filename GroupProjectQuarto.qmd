@@ -113,7 +113,7 @@ avg_co2_life <- co2life_joined |>
   )
 ```
 
-```{r}
+```{r, fig.cap = "Fig. 2. Relationship Between CO2 Emissions and Life Expectancy Over Time."}
 avg_co2_life %>%
   ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
@@ -127,7 +127,9 @@ avg_co2_life %>%
   theme(
     plot.title = element_text(hjust = 0.5)
     )
+```
 
+```{r}
 influential_outliers <- avg_co2_life|>
   filter(avg_emissions > 1000)
 
@@ -140,9 +142,8 @@ datatable(influential_outliers, class = 'cell-border stripe hover order-column',
                        "Average Life Expectancy" = "avg_life_exp"),
           caption = "Table 1: Influential Outliers"
 )
-
 ```
-
+<br>
 Based on this scatterplot we again observed that the relationship between life expectancy and CO2 emissions is very weak. However our linear regression showed a positive correlation between life expectancy and CO2 emissions, which is likely due to the extreme outliers in our data. For example, China and the United States have extremely high levels of average CO2 emissions and average life expectancy which would bias our estimate of the relationship between average life expectancy and average CO2 emissions.
 
 ```{r}
@@ -165,7 +166,7 @@ datatable(tidy_co2life,  class = 'cell-border stripe hover',
           caption = "Table 2: Estimated Coefficients of the Linear Regression",
 )
 ```
-
+<br>
 From our linear regression of average life expectancy on average CO2 emissions we get the equation: $\widehat {Avg\,Life\,Expectancy} = 56.41 + 0.01(Avg\,Emissions)$
 
 Based on this equation, the predicted average life expectancy of someone living in a country with no CO2 emissions would be approximately 56.41 years. Additionally, the coefficient on average emissions of 0.01 means that for each additional 100 million tonne increase in average CO2 emissions per capita, predicted average life expectancy increases by 1 year.
@@ -194,7 +195,7 @@ datatable(modfit_table,  class = 'cell-border stripe hover',
           caption = "Table 3: Model Fit Variances",
 )
 ```
-
+<br> 
 There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
 
 Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations. Another way to check if it is a good model is through predictive checks.
@@ -223,7 +224,7 @@ sim_data <- avg_co2_life %>%
   cbind(sim_response)
 ```
 
-```{r, fig.align = "center", fig.width = 8, fig.cap = "Comparison of Observed vs Simulated values for Life Expectancy Depending on CO2 Emissions."}
+```{r, fig.align = "center", fig.width = 8, fig.cap = "Fig. 3. Comparison of Observed vs Simulated values for Life Expectancy Depending on CO2 Emissions."}
 obs_reg_avgco2life <- avg_co2_life %>%
   ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
@@ -254,8 +255,7 @@ sim_reg_avgco2life <- sim_data %>%
 
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
-
-
+<br>
 We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated normally distributed data we see that the simulated data points are clustered around an average life expectancy of 55 years instead of evenly distributed. From this we can observe that our data is not likely normally.
 
 
