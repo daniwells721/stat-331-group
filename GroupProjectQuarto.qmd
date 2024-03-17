@@ -28,9 +28,9 @@ lex_data <- read_csv(here::here("lex.csv"))
 
 As the world experiences the increasing effects of climate change, it becomes important to look at how different aspects of climate change affect our lives. For this project we looked at the relationship between life expectancy at birth and total CO2 emissions. In order to do this, we used the “Life expectancy, at birth” and “Consumption CO2 emissions, million tonnes” variables from Gapminder in our analysis, with both of these data sets including information on 186 different countries.
 
-Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted from each country per Capita. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
+Total CO2 emissions was the explanatory variable, and was measured in million tonnes. It is total carbon dioxide emitted per capita from each country. Life expectancy at birth was the response variable, and it was measured in years. It is the number of years an infant born in a given country in a given year would live if mortality rates stay the same throughout its life. We chose to study the relationship between these variables over the years 1920 to 2019 because these years were the most recent for which most countries had data available. We chose to omit the data post 2019 because we thought the COVID-19 pandemic might have altered the trends visualized in a way which is not representative of the data set as a whole.
 
-We believe that increased levels of CO2 emission decrease life expectancy, which is line with a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.) which found that, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
+We believe that increased levels of CO2 emissions per capita are correlated with a decrease in life expectancy. This is in line with a study conducted by the [National Library of Medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8782287/#:~:text=Carbon%20emissions%20have%20a%20significantly,decreases%20life%20expectancy%20by%200.012%25.) which found that, “Carbon emissions have a significantly negative impact on life expectancy, suggesting that higher the carbon emissions lower the life expectancy.”
 
 ## Methods
 
@@ -93,15 +93,15 @@ avg_co2_life_twodecade <- co2_life_twodecade |>
 
 ## Results
 
-To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the Y-axis to CO2 emissions on the X-Axis. The plot was animated to cycle between the 20 year periods using gganimate.
+To visualize the relationship between CO2 emissions and life expectancy at birth we used a scatter plot to map the relationship between the variables overtime. For readability we separated the data into five twenty year periods in which we related life expectancy on the y-axis to CO2 emissions on the x-axis. The plot was animated to cycle between the 20 year periods using gganimate.
 
 REMEMBER TO PUT THE GG PLOT BACK IN
 
-From this graph we observed that CO2 emissions and life expectancy at birth have increased for most most countries. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We also saw that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observed in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2.
+From this graph we observed that CO2 emissions and life expectancy at birth have increased for most most countries. We also see that life expectancy tends to start plateauing around the 80-85 year range, while CO2 emissions continue to grow exponentially for some countries. We also saw that there is not a strong relationship between life expectancy and CO2 emissions as there is not one strict line that we observed in the scatter plot. However if we were to classify a possible relationship between life expectancy and C02 emissions based on these graphs then it would be a weak positive correlation with numerous outliers that seem to follow the trend of exponential growth of CO2 emissions.
 
 #### Linear Regression
 
-To get a clearer picture of how life expectancy relates to CO2 emissions across countries, we took the average of both Life Expectancy and CO2 emissions for all years for each country and created a scatter plot of values. We also fitted a linear regression line to show the relationship we attain when regressing the average life expectancy of each country on it's average CO2 emissions.
+To get a clearer picture of how life expectancy relates to CO2 emissions across countries, we took the average of both life expectancy and CO2 emissions for all years for each country and created a scatter plot of values. We also fitted a linear regression line to show the relationship attained when regressing the average life expectancy of each country on it's average CO2 emissions.
 
 ```{r}
 #The relationship between the two quantitative variables you are investigating.
@@ -113,7 +113,7 @@ avg_co2_life <- co2life_joined |>
   )
 ```
 
-```{r}
+```{r, fig.cap = "Fig. 2. Relationship Between CO2 Emissions and Life Expectancy Over Time."}
 avg_co2_life %>%
   ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
@@ -127,7 +127,9 @@ avg_co2_life %>%
   theme(
     plot.title = element_text(hjust = 0.5)
     )
+```
 
+```{r}
 influential_outliers <- avg_co2_life|>
   filter(avg_emissions > 1000)
 
@@ -140,10 +142,9 @@ datatable(influential_outliers, class = 'cell-border stripe hover order-column',
                        "Average Life Expectancy" = "avg_life_exp"),
           caption = "Table 1: Influential Outliers"
 )
-
 ```
-
-Based on this scatterplot we again observed that the relationship between life expectancy and CO2 emissions is very weak. However our linear regression showed a positive correlation between life expectancy and CO2 emissions, which is likely due to the extreme outliers in our data. For example, China and the United States have extremely high levels of average CO2 emissions and average life expectancy which would bias our estimate of the relationship between average life expectancy and average CO2 emissions.
+<br>
+Based on this scatter plot, we again observed that the relationship between life expectancy and CO2 emissions is very weak. However our linear regression showed a positive correlation between life expectancy and CO2 emissions, which is likely due to the extreme outliers in our data. For example, China and the United States have extremely high levels of average CO2 emissions and average life expectancy which would bias our estimate of the relationship between average life expectancy and average CO2 emissions.
 
 ```{r}
 mod_co2life <- lm(avg_life_exp ~ avg_emissions, data = avg_co2_life)
@@ -165,7 +166,7 @@ datatable(tidy_co2life,  class = 'cell-border stripe hover',
           caption = "Table 2: Estimated Coefficients of the Linear Regression",
 )
 ```
-
+<br>
 From our linear regression of average life expectancy on average CO2 emissions we get the equation: $\widehat {Avg\,Life\,Expectancy} = 56.41 + 0.01(Avg\,Emissions)$
 
 Based on this equation, the predicted average life expectancy of someone living in a country with no CO2 emissions would be approximately 56.41 years. Additionally, the coefficient on average emissions of 0.01 means that for each additional 100 million tonne increase in average CO2 emissions per capita, predicted average life expectancy increases by 1 year.
@@ -194,7 +195,7 @@ datatable(modfit_table,  class = 'cell-border stripe hover',
           caption = "Table 3: Model Fit Variances",
 )
 ```
-
+<br> 
 There is a lot of variability in the actual average life expectancy values, which had a value of about 206.51. This means that the average observed life expectancy in the data set was extremely spread out. Since the variance in the model predictions is much lower than the variance in the response variable, it means that the model is not accurately explaining a large proportion of the variability. In other words, CO2 emissions explain very little of the variability in average life expectancy. Lastly, the high variance of the residuals means that the residuals are largely spread out, and the relationship is likely not linear.
 
 Based on the model, there is not a linear relationship between average CO2 emissions and average life expectancy. Additionally based on the high variability of the residuals, the conditions of normality and equal variance of the residuals is likely not met. However since the countries were all sampled separately, there is independence between observations. Another way to check if it is a good model is through predictive checks.
@@ -223,7 +224,7 @@ sim_data <- avg_co2_life %>%
   cbind(sim_response)
 ```
 
-```{r, fig.align = "center", fig.width = 8, fig.cap = "Comparison of Observed vs Simulated values for Life Expectancy Depending on CO2 Emissions."}
+```{r, fig.align = "center", fig.width = 8, fig.cap = "Fig. 3. Comparison of Observed vs Simulated values for Life Expectancy Depending on CO2 Emissions."}
 obs_reg_avgco2life <- avg_co2_life %>%
   ggplot(aes(x = avg_emissions, y = avg_life_exp)) + 
   geom_point(size = 0.8, alpha = 0.5) + 
@@ -255,6 +256,10 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
+<<<<<<< HEAD
+=======
+<br>
+>>>>>>> 5764530f8ca8b335bccccc70a4514773563a9295
 We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated normally distributed data we see that the simulated data points are clustered around an average life expectancy of 55 years instead of evenly distributed. From this we can observe that our data is not likely normally.
 
 #### Multiple Predictive Checks
@@ -304,11 +309,16 @@ r_squared_values %>%
 ```
 
 ## Discussion
+<<<<<<< HEAD
 
 From our data set, we found that a linear regression was not a good model to use. Not only did the original data not meet the validity conditions for it, but when the simulated data was created based on the model it showed that the regression model did not accurately predict average life expectancy. Additionally, after running multiple predictive checks and recording the $R^2$, it was seen that a majority of the simulations had an $R^2$ of 0, meaning that 0% of the variability in average life expectancy was explained by the average CO2 emissions per capita.
+=======
+From our data set, we found that a linear regression was not a good model to use. Not only did the original data not meet the validity conditions for it, but when the simulated data was created based on the model it showed that the regression model did not accurately predict average life expectancy. Additionally, after running multiple predictive checks and recording the $R^2$, it was seen that a majority of the simulations had an $R^2$ of 0, meaning that 0% of the variability in average life expectancy was explained by the average CO2 emissions per capita.  
+>>>>>>> 5764530f8ca8b335bccccc70a4514773563a9295
 
-Since the regression model did not fit the data set, it would be interesting to see what other models might better predict or account for the variance in average life expectancy. It should also be acknowledge though, that there are many different factors that influence the life expectancy of people, and it might be a very complicated model to try to build.
+Since the regression model did not fit the data set, it would be interesting to see what other models might better predict or account for the variance in average life expectancy. It should also be acknowledge though, that there are many different factors that influence the life expectancy of people, and it might be a very complicated model to try to build.  
 
+<<<<<<< HEAD
 ## Conclusion
 
 In conclusion, our study on the relationship between life expectancy at birth and total CO2 emissions across 186 countries from 1920 to 2019 reveals a complex and unexpected dynamic between these variables. Despite predictions that higher CO2 emissions would correlate with lower life expectancies, our findings suggest that there is no direct linear correlation. Our linear regression model indicated a slight increase in life expectancy with rising CO2 emissions, yet the significant variability and the non-linearity of the observed data suggest that CO2 emissions alone are not a definitive factor in determining life expectancy. This study emphasizes the complexity of the factors which affect average life expectancy, and demonstrates the necessity for broader research to fully grasp these relationships.
@@ -325,3 +335,10 @@ citation("gganimate")
 citation("gifski")
 
 ```
+=======
+One of the major confounding variables that likely caused the major discrepancy between our predicted hypothesis and the observed relationship between life expectancy and CO2 emissions is a country's economic growth. Economic growth is heavily correlated with both life expectancy and CO2 emissions and since we did not include it in our model it introduces a lot of omitted variable bias. The article "[The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators](https://www.mdpi.com/1660-4601/20/3/2325)" (Li et al., 2023)  talks about the strong relationship between CO2 emissions and economic growth as well as the relationship between economic growth and life expectancy. From this we can see that the weak positive relationship between CO2 emissions and life expectancy is likely not a direct relationship and is instead a result of omitting GDP from our model. In actuality the relationship we are observing is the one where increases in economic growth and changes in policy increases CO2 emissions and this same economic growth is linked with an increases in positive health outcomes. 
+
+## Conclusion
+
+In conclusion, our study on the relationship between life expectancy at birth and total CO2 emissions across 186 countries from 1920 to 2019 reveals a complex and unexpected dynamic between these variables. Despite predictions that higher CO2 emissions would correlate with lower life expectancies, our findings suggest that there is no direct linear correlation. Our linear regression model indicated a slight increase in life expectancy with rising CO2 emissions, yet the significant variability and the non-linearity of the observed data suggest that CO2 emissions alone are not a definitive factor in determining life expectancy. This study emphasizes the complexity of the factors which affect average life expectancy, and demonstrates the necessity for broader research to fully grasp these relationships.
+>>>>>>> 5764530f8ca8b335bccccc70a4514773563a9295
