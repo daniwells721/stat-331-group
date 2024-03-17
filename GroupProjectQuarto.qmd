@@ -138,6 +138,9 @@ influential_outliers <- avg_co2_life|>
   filter(avg_emissions > 1000)
 
 datatable(influential_outliers, class = 'cell-border stripe hover order-column',
+          options = list(searching = FALSE, 
+                         lengthMenu = list(c(10, -1), c('10', 'All')),
+                         paging = FALSE), 
           colnames = c("Country" = "country", 
                        "Average Emissions" = "avg_emissions",
                        "Average Life Expectancy" = "avg_life_exp"),
@@ -158,6 +161,9 @@ tidy_co2life <- tidy_co2life|>
   )
 
 datatable(tidy_co2life,  class = 'cell-border stripe hover',
+          options = list(searching = FALSE, 
+                         lengthMenu = list(c(10, -1), c('10', 'All')),
+                         paging = FALSE),
           colnames = c("Coefficient Estimate" = "estimate", 
                        "Standard Error" = "std.error",
                        "T-Statistic" = "statistic",
@@ -185,6 +191,9 @@ modfit_table <- modfit_table|>
   )
 
 datatable(modfit_table,  class = 'cell-border stripe hover',
+          options = list(searching = FALSE, 
+                         lengthMenu = list(c(10, -1), c('10', 'All')),
+                         paging = FALSE),
           colnames = c("Variance in Life Expectancy" = "life_re", 
                        "Variance in Fitted Values" = "life_fitt",
                        "Variance in Residuals" = "life_resid"),
@@ -227,7 +236,7 @@ obs_reg_avgco2life <- avg_co2_life %>%
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Scatterplot of Observed CO2 \nEmissions vs. Life Expectancy over Time",
+    title = "Scatterplot of Observed Avg. Life \nExpectancy vs. Avg. CO2 Emissions",
     subtitle = "Average Life Expectancy (years)",
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
@@ -241,7 +250,7 @@ sim_reg_avgco2life <- sim_data %>%
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() + 
   labs(
-    title = "Simulated Average Life Expectancy over \nTime based on Regression Model",
+    title = "Scatterplot of Simulated Avg. Life \nExpectancy vs. Avg. CO2 Emissions",
     subtitle = "Simulated Average Life Expectancy (years)",
     x = "Average CO2 Emissions (million tonnes per capita)",
     y = "") +
