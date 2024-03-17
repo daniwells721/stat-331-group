@@ -237,26 +237,18 @@ In order to measure the fit of our model to the dataset we observe from Gapminde
 
 ```{r}
 mod_co2life_predict <- predict(mod_co2life) 
-```
 
-```{r}
 mod_co2life_sigma <- sigma(mod_co2life)
-```
 
-```{r}
 noise <- function(x, mean = 0, sd) {
   x + rnorm(length(x),
             mean, 
             sd)
 }
-```
 
-```{r}
 sim_response <- tibble(sim_life_exp = noise(mod_co2life_predict,
                                             sd = mod_co2life_sigma))
-```
 
-```{r}
 sim_data <- avg_co2_life %>% 
   filter(!is.na(avg_life_exp),
          !is.na(avg_emissions)) %>% 
