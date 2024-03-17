@@ -48,22 +48,16 @@ CO2_emissions_clean <- CO2_emissions %>%
   pivot_longer(cols = `1920`:`2019`,
                names_to = "year",
                values_to = "emissions")
-```
 
-```{r}
 lex_clean <- lex_data %>%
   select(country, `1920`:`2019`) %>%
   filter(if_all(c(`1920`:`2019`), ~ !is.na(.))) %>%
   pivot_longer(cols = `1920`:`2019`,
                names_to = "year",
                values_to = "life_exp")
-```
 
-```{r}
 co2life_joined <- inner_join(CO2_emissions_clean, lex_clean)
-```
 
-```{r}
 #Seperating the data into 20 year chunks
 years_1920_1939 <- as.character(seq(1920, 1939))
 years_1940_1959 <- as.character(seq(1940, 1959))
@@ -261,7 +255,7 @@ sim_reg_avgco2life <- sim_data %>%
 obs_reg_avgco2life + sim_reg_avgco2life
 ```
 
-We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side.
+We created these side-by-side comparison using the [patchwork package](https://github.com/thomasp85/patchwork). From this comparison we notice a few differences between our observed and simulated data, the biggest one being the concentration of data points around the y axis. In our observed data that have around 0 carbon emissions are fairly evenly distributed between 40 and 70 years of age, where as in our simulated data we see more of what we expect from a normal distribution where the simulated data points are fairly centered around an average life expectancy of 55 years and seems normally distributed on either side. 
 
 #### Multiple Predictive Checks
 
