@@ -295,7 +295,7 @@ obs_reg_avgco2life + sim_reg_avgco2life
 
 #### Multiple Predictive Checks
 
-To further measure the fit of our model we took the observed average life expectancy regressed on 1000 simulations of average life expectancy made by simulating a normal distribution with the same standard error as our observed data. From this we calculated the $R^2$ to measure how much variance in our data set is captured by various simulations. That is to say we are measuring the similarity between our observed and simulated data sets. 
+To further measure the fit of our model we took the observed average life expectancy regressed on 1000 simulations of average life expectancy made by simulating a normal distribution with the same standard error as our observed data. From this we calculated the $R^2$ to measure how much variance in our data set is captured by various simulations. That is to say we are measuring the similarity between our observed and simulated data sets.
 
 ```{r, fig.align = "center", fig.width = 8, fig.cap = "Fig. 4. Histogram of R Squared from one thousand regressions of observed average life expectancy on simulated average life expectancy."}
 
@@ -337,7 +337,7 @@ r_squared_values %>%
   theme_bw()
 ```
 
-$R^2$ values near 1 indicates perfect fit so ideally we would see a distribution with a mean near 1 to indicate that our model is a good fit for the data. However from this histogram we can see that our $R^2$ has a mean close to 0 which indicates very little similarity and means that our model is not a good fit for the data. 
+$R^2$ values near 1 indicates perfect fit so ideally we would see a distribution with a mean near 1 to indicate that our model is a good fit for the data. However from this histogram we can see that our $R^2$ has a mean close to 0 which indicates very little similarity and means that our model is not a good fit for the data.
 
 ## Discussion
 
@@ -352,6 +352,10 @@ In conclusion, our study on the relationship between life expectancy at birth an
 One of the major confounding variables that likely caused the major discrepancy between our predicted hypothesis and the observed relationship between life expectancy and CO2 emissions is a country's economic growth. Economic growth is heavily correlated with both life expectancy and CO2 emissions and since we did not include it in our model it introduces a lot of omitted variable bias. The article "[The Relationship between Energy Consumption, CO2 Emissions, Economic Growth, and Health Indicators](https://www.mdpi.com/1660-4601/20/3/2325)" (Li et al., 2023) talks about the strong relationship between CO2 emissions and economic growth as well as the relationship between economic growth and life expectancy. From this we can see that the weak positive relationship between CO2 emissions and life expectancy is likely not a direct relationship and is instead a result of omitting GDP from our model. In actuality the relationship we are observing is the one where increases in economic growth and changes in policy increases CO2 emissions and this same economic growth is linked with an increases in positive health outcomes.
 
 ## Citations
+
+  "Life Expectancy at Birth." Gapminder, Gapminder Foundation, documentation version 12, <https://www.gapminder.org/data/documentation/gd004/>.
+
+  "CO2 Emissions from Fuel Combustion." Gapminder, Gapminder Foundation, 2022, <http://gapm.io/dco2_consumption_historic>
 
   Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” *Journal of Open Source Software*, *4*(43), 1686. doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
 
