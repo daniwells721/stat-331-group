@@ -262,8 +262,10 @@ obs_reg_avgco2life + sim_reg_avgco2life
 
 To further measure the fit of our model we took the observed average life expectancy regressed on 1000 simulations of average life expectancy made by simulating a normal distribution with the same standard error as our observed data. From this we calculated the $R^2$ to measure how much variance in our data set is captured by various simulations. That is to say we are measuring the similarity between our observed and simulated data sets. 
 
-```{r}
+```{r, fig.align = "center", fig.width = 8, fig.cap = "Fig. 4. Histogram of R Squared from one thousand regressions of observed average life expectancy on simulated average life expectancy."}
+
 simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2_life) {
+  
   # Generate sim data
   sim_response_rep <- tibble(sim_life_exp = noise(mod_co2life_predict, sd = mod_co2life_sigma))
   
@@ -280,11 +282,7 @@ simulate_and_regress <- function(mod_co2life_predict, mod_co2life_sigma, avg_co2
   return(rsquared)
 }
 
-```
 
-```{r, fig.align = "center", fig.width = 8, fig.cap = "Fig. 4. Histogram of R Squared from one thousand regressions of observed average life expectancy on simulated average life expectancy."}
-comparison_mod <- lm(avg_life_exp ~ sim_life_exp, data = sim_data)
-comparison_rsquared <- summary(comparison_mod)$r.squared
 
 # Set seed for reproducibility
 set.seed(2003)
